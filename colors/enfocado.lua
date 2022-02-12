@@ -14,6 +14,7 @@
 --       \ && !has('gui_running') && &t_Co != 256
 --   finish
 -- endif
+vim.cmd("set termguicolors")
 if vim.fn.has("termguicolors") == false then
   return
 end
@@ -87,16 +88,14 @@ local enfocado_plugins = vim.g.enfocado_plugins
 
 
 -- A function is created to check on-demand plugins.
-local function plugin_is_activated(name, only_nvim)
-  if enfocado_plugins == "none" or (only_nvim == 1 and vim.fn.has("nvim") == 0) then
+local function plugin_is_activated(name)
+  if enfocado_plugins == "none" then
     return 0
-  elseif (only_nvim == 1 and vim.fn.has("nvim") == 1 ) and only_nvim == 0 then
-    if enfocado_plugins == "all" then
+  elseif enfocado_plugins == "all"  then
+    return 1
+  else
+    if enfocado_plugins[name] == true then
       return 1
-    else
-      if enfocado_plugins[name] ==true then
-        return 1
-      end
     end
   end
 end
@@ -212,6 +211,7 @@ highlighter('SpellRare', undercurl, none, none, magenta)
 highlighter('StatusLine', none, bg_1, dim_0, none)
 highlighter('StatusLineNC', none, bg_1, bg_2, none)
 highlighter('StatuslineTerm', none, bg_1, dim_0, none)
+
 highlighter('StatuslineTermNC', none, bg_1, bg_2, none)
 highlighter('Success', none, none, br_green, none)
 highlighter('TabLine', none, bg_1, bg_2, none)
@@ -226,17 +226,17 @@ highlighter('VisualNC', none, bg_2, none, none)
 highlighter('VisualNOS', none, bg_2, none, none)
 highlighter('WarningMsg', none, none, br_orange, none)
 highlight_linker("EndOfBuffer", "NonText")
-highlight_linker("Line", "ColorColumn0")
-highlight_linker("LineNrAbov", "LineNr0")
+highlight_linker("Line", "ColorColumn")
+highlight_linker("LineNrAbov", "LineNr")
 highlight_linker("LineNrBelow", "LineNr")
 highlight_linker("MsgArea", "Dimmed")
 highlight_linker("MsgSeparator", "StatusLineNC")
-highlight_linker("QuickFixLine, Search")
+highlight_linker("QuickFixLine", "Search")
 highlight_linker("Substitute", "Search")
 highlight_linker("TermCursorNC", "None")
 highlight_linker("Whitespace", "NonText")
-highlighterFloatShadow ctermbg=16 guibg=#000000 blend=60
-highlighterFloatShadowThrough ctermbg=16 guibg=#000000 blend=100
+--[[ highlighte! FloatShadow ctermbg=16 guibg=#000000 blend=60
+highlighte! FloatShadowThrough ctermbg=16 guibg=#000000 blend=100 ]]
 
 -- General syntax.
 highlighter('Comment', italic, none, dim_0, none)
@@ -269,7 +269,7 @@ highlight_linker("String", "Constant")
 highlight_linker("Structure", "Type")
 highlight_linker("Tag", "Statement")
 highlight_linker("Typedef", "Type")
-highlight! Underlined term=underline cterm=underline gui=underline
+-- highlight! Underlined term=underline cterm=underline gui=underline
 
 -- Neovim diagnostic.
 highlighter('DiagnosticError', none, none, br_red, none)
@@ -317,14 +317,14 @@ highlight_linker("diffSubname", "Title")
 -- SECTION: Plugins for Neo(Vim) groups highlighting.
 -- ------------------------------------------------------------------------------
 -- coc.nvim: {{{
-  if plugin_is_activated('coc', 0) then
+  if plugin_is_activated('coc') then
     -- Coc markdown.
     highlight_linker("CocMarkdownHeader", "Title")
     highlight_linker("CocMarkdownLink", "Link")
-    highlight! CocBold term=bold cterm=bold gui=bold
+    --[[ highlight! CocBold term=bold cterm=bold gui=bold
     highlight! CocItalic term=italic cterm=italic gui=italic
     highlight! CocStrikeThrough term=strikethrough cterm=strikethrough gui=strikethrough
-    highlight! CocUnderline term=underline cterm=underline gui=underline
+    highlight! CocUnderline term=underline cterm=underline gui=underline ]]
 
     -- " Coc diagnostics.
     highlight_linker("CocErrorHighlight", "DiagnosticUnderlineError")
@@ -435,12 +435,12 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- copilot.vim: {{{
-  if plugin_is_activated('copilot', 1) then
+  if plugin_is_activated('copilot') then
     highlighter("CopilotSuggestion", none, bg_0, dim_0, none)
   end
 -- }}}
 -- dashboard-nvim: {{{
-  if plugin_is_activated('dashboard', 0) then
+  if plugin_is_activated('dashboard') then
     highlight_linker("DashboardHeader", "Accent")
     highlight_linker("DashboardCenter", "Dimmed")
     highlight_linker("DashboardShortCut", "Dimmed")
@@ -448,34 +448,34 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- fzf.vim: {{{
-  if plugin_is_activated('fzf', 0) then
+  if plugin_is_activated('fzf') then
     -- fzf apply enfocado groups.
-    if !exists('g:fzf_colors')
-      let g:fzf_colors = {
-            \ 'bg'     : [ 'bg', 'NormalFloat'    ],
-            \ 'bg+'    : [ 'bg', 'Search'         ],
-            \ 'border' : [ 'fg', 'FloatBorder'    ],
-            \ 'fg'     : [ 'fg', 'NormalFloat'    ],
-            \ 'fg+'    : [ 'fg', 'NormalFloat'    ],
-            \ 'header' : [ 'fg', 'Title'          ],
-            \ 'hl'     : [ 'fg', 'Accent'         ],
-            \ 'hl+'    : [ 'fg', 'Search'         ],
-            \ 'info'   : [ 'fg', 'DiagnosticInfo' ],
-            \ 'marker' : [ 'fg', 'NormalFloat'    ],
-            \ 'pointer': [ 'fg', 'NormalFloat'    ],
-            \ 'prompt' : [ 'fg', 'Dimmed'         ],
-            \ 'spinner': [ 'fg', 'DiagnosticInfo' ]
-          \ }
-    end
+    -- if !exists('g:fzf_colors')
+      -- let g:fzf_colors = {
+            -- \ 'bg'     : [ 'bg', 'NormalFloat'    ],
+            -- \ 'bg+'    : [ 'bg', 'Search'         ],
+            -- \ 'border' : [ 'fg', 'FloatBorder'    ],
+            -- \ 'fg'     : [ 'fg', 'NormalFloat'    ],
+            -- \ 'fg+'    : [ 'fg', 'NormalFloat'    ],
+            -- \ 'header' : [ 'fg', 'Title'          ],
+            -- \ 'hl'     : [ 'fg', 'Accent'         ],
+            -- \ 'hl+'    : [ 'fg', 'Search'         ],
+            -- \ 'info'   : [ 'fg', 'DiagnosticInfo' ],
+            -- \ 'marker' : [ 'fg', 'NormalFloat'    ],
+            -- \ 'pointer': [ 'fg', 'NormalFloat'    ],
+            -- \ 'prompt' : [ 'fg', 'Dimmed'         ],
+            -- \ 'spinner': [ 'fg', 'DiagnosticInfo' ]
+          -- \ }
+    -- end
 
-    " Others FZF groups.
+    -- Others FZF groups.
     highlighter("Fzf1", bold, bg_2, dim_0, none)
     highlighter("Fzf2", none, bg_1, dim_0, none)
     highlighter("Fzf3", none, bg_0, dim_0, none)
   end
 -- }}}
 -- nerdtree: {{{
-  if plugin_is_activated('nerdtree', 0) then
+  if plugin_is_activated('nerdtree') then
     highlighter("NERDTreeFile", none, none, dim_0, none)
     highlight_linker("NERDTreeBookmark", "Dimmed")
     highlight_linker("NERDTreeBookmarkHeader", "Title")
@@ -500,7 +500,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- netrw: {{{
-  if plugin_is_activated('netrw', 0) then
+  if plugin_is_activated('netrw') then
     highlight_linker("netrwClassify", "Dimmed")
     highlight_linker("netrwCmdSep", "Ignore")
     highlight_linker("netrwComment", "Comment")
@@ -515,7 +515,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- nvim-cmp: {{{
-  if plugin_is_activated('cmp', 1) then
+  if plugin_is_activated('cmp') then
     highlight_linker("CmpItemAbbrDefault", "Text")
     highlight_linker("CmpItemAbbrDeprecatedDefault", "Error")
     highlight_linker("CmpItemAbbrMatchDefault", "Accent")
@@ -550,7 +550,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- nvim-lspconfig: {{{
-  if plugin_is_activated('lsp', 1) then
+  if plugin_is_activated('lsp') then
     highlight_linker("LspCodeLens", "Dimmed")
     highlight_linker("LspCodeLensSeparator", "NonText")
     highlight_linker("LspReferenceRead", "Visual")
@@ -560,7 +560,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- nvim-lsp-installer: {{{
-  if plugin_is_activated('lsp-installer', 1) then
+  if plugin_is_activated('lsp-installer') then
     highlight_linker("LspInstallerHeader", "Title")
     highlight_linker("LspInstallerServerExpanded", "Text")
     highlight_linker("LspInstallerHeading", "Title")
@@ -575,7 +575,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- nvim-notify: {{{
-  if plugin_is_activated('notify', 1) then
+  if plugin_is_activated('notify') then
     highlighter("NotifyERRORBorder", none, none, br_red, none)
     highlighter("NotifyDEBUGBorder", none, none, dim_0, none)
     highlighter("NotifyINFOBorder", none, none, br_yellow, none)
@@ -601,12 +601,12 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- nvim-scrollview: {{{
-  if plugin_is_activated('scrollview', 1) then
-    highlight_linker(ScrollView Line
+  if plugin_is_activated('scrollview') then
+    highlight_linker("ScrollView", "Line")
   end
 --}}}
 -- nvim-treesitter: {{{
-  if plugin_is_activated('treesitter', 1) then
+  if plugin_is_activated('treesitter') then
     highlighter("TSLiteral", italic, none, fg_0, none)
     highlighter("TSNote", bold, br_green, bg_1, none)
     highlighter("TSTitle", bold_italic, none, fg_1, none)
@@ -667,14 +667,14 @@ highlight_linker("diffSubname", "Title")
     highlight_linker("TSVariable", "Identifier")
     highlight_linker("TSVariableBuiltin", "IdentifierBuiltin")
     highlight_linker("TSWarning", "DiagnosticWarn")
-    highlight! "TSEmphasis", "term=italic cterm=italic gui=italic"
+    --[[ highlight! "TSEmphasis", "term=italic cterm=italic gui=italic"
     highlight! TSStrike term=strikethrough cterm=strikethrough gui=strikethrough
     highlight! TSStrong term=bold cterm=bold gui=bold
-    highlight! TSUnderline term=underline cterm=underline gui=underline
+    highlight! TSUnderline term=underline cterm=underline gui=underline ]]
   end
 -- }}}
 -- nvim-tree.lua: {{{
-  if plugin_is_activated('tree', 2) then
+  if plugin_is_activated('tree') then
     highlighter("NvimTreeNormal", none, bg_0, dim_0, none)
     highlighter("NvimTreeNormalNC", none, bg_0, dim_0, none)
     highlight_linker("NvimTreeCursorColumn", "Line")
@@ -717,7 +717,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- packer.nvim: {{{
-  if plugin_is_activated('packer', 1) then
+  if plugin_is_activated('packer') then
     highlight_linker("packerWorking", "Accent")
     highlight_linker("packerSuccess", "Success")
     highlight_linker("packerFail", "DiagnosticError")
@@ -741,7 +741,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- rainbow: {{{
-  if plugin_is_activated('rainbow', 0) then
+  --[[ if plugin_is_activated('rainbow') then
     if enfocado_style == "neon" then
       let rainbow_guifgs   = [ violet[0], cyan[0], magenta[0], br_violet[0] ]
       let rainbow_ctermfgs = [ violet[1], cyan[1], magenta[1], br_violet[1] ]
@@ -761,10 +761,10 @@ highlight_linker("diffSubname", "Title")
     if !has_key(g:rainbow_conf, 'ctermfgs') then
       let g:rainbow_conf['ctermfgs'] = rainbow_ctermfgs
     end
-  end
+  end ]]
 --}}}
 -- telescope.nvim: {{{
-  if plugin_is_activated('telescope', 1) then
+  if plugin_is_activated('telescope') then
     highlighter("TelescopePreviewDate", none, none, blue, none)
     highlighter("TelescopePreviewDirectory", bold, none, br_blue, none)
     highlighter("TelescopePreviewExecute", none, none, green, none)
@@ -814,7 +814,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- todo-comments.nvim: {{{
-  if plugin_is_activated('todo-comments', 1) then
+  if plugin_is_activated('todo-comments') then
     highlighter("TodoBgFIX", bold, br_red, bg_1, none)
     highlighter("TodoBgHACK", bold, br_yellow, bg_1, none)
     highlighter("TodoBgNOTE", bold, br_green, bg_1, none)
@@ -836,14 +836,14 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- vim-floaterm: {{{
-  if plugin_is_activated('floaterm', 0) then
+  if plugin_is_activated('floaterm') then
     highlight_linker("Floaterm", "NormalFloat")
     highlight_linker("FloatermBorder", "FloatBorder")
     highlight_linker("FloatermNC", "NormalFloat")
   end
 -- }}}
 -- vim-matchup: {{{
-  if plugin_is_activated('matchup', 0) then
+  if plugin_is_activated('matchup') then
     highlight_linker("MatchBackground", "Visual")
     highlight_linker("MatchParenCur", "Visual")
     highlight_linker("MatchWord", "Visual")
@@ -851,7 +851,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- vim-plug: {{{
-  if plugin_is_activated('plug', 0) then
+  if plugin_is_activated('plug') then
     highlight_linker("plug1", "Title")
     highlight_linker("plug2", "Accent")
     highlight_linker("plugBracket", "Text")
@@ -876,8 +876,8 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- vim-signify: {{{
-  if plugin_is_activated('signify', 0) then
-    if exists('g:signify_line_highlight') && g:signify_line_highlight == 1 then
+  if plugin_is_activated('signify') then
+    if vim.g.signify_line_highlight == 1 then
       highlight_linker("SignifyLineAdd", "DiffAdd")
       highlight_linker("SignifyLineChange", "DiffChange")
       highlight_linker("SignifyLineChangeDelete", "DiffChange")
@@ -892,7 +892,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- vim-which-key: {{{
-  if plugin_is_activated('which-key', 0) then
+  if plugin_is_activated('which-key') then
     highlight_linker("WhichKey", "Text")
     highlight_linker("WhichKeyDesc", "Text")
     highlight_linker("WhichKeyFloat", "NormalFloat")
@@ -902,7 +902,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- vista.vim: {{{
-  if plugin_is_activated('vista', 0) then
+  if plugin_is_activated('vista') then
     highlight_linker("VistaBracket", "Ignore")
     highlight_linker("VistaChildrenNr", "Ignore")
     highlight_linker("VistaColon", "Ignore")
