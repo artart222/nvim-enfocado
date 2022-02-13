@@ -1,23 +1,13 @@
 -------------------------------------------------------------------------------
 -- Name:        Enfocado for Vim
--- Author:      Wuelner Martínez <wuelner.martinez@outlook.com>
--- URL:         https://github.com/wuelnerdotexe/vim-enfocado
+-- Author:      Mobasher Artin(artart222) <mobasherartin.icm@gmail.com>
+-- URL:         https://github.com/artart222/nvim-enfocado
 -- License:     MIT (C) Wuelner Martínez.
 -- Description: How themes should be.
 -- About:       Enfocado is more than a theme, it is a concept of "how themes
 --              should be", focusing on what is really important to developers:
 --              the code and nothing else.
 -------------------------------------------------------------------------------
-
--- " The script ends if the theme is not supported.
--- if !(has('termguicolors') && &termguicolors)
---       \ && !has('gui_running') && &t_Co != 256
---   finish
--- endif
-vim.cmd("set termguicolors")
-if vim.fn.has("termguicolors") == false then
-  return
-end
 
 -- " The Enfocado theme is initialized.
 vim.g.colors_name = "enfocado"
@@ -30,6 +20,7 @@ if vim.g.colors_name then
   vim.cmd("hi clear")
   vim.cmd("syntax reset")
 end
+
 
 local bg_0       = { "#181818", 234 }
 local bg_1       = { "#252525", 235 }
@@ -81,7 +72,6 @@ local italic      = { 'italic'       , 'italic'        }
 local underline   = { 'underline'    , 'underline'     }
 local undercurl   = { 'undercurl'    , 'underline'     }
 
-
 -- " Enfocado configuration variables are initialized.
 local enfocado_style   = vim.g.enfocado_style
 local enfocado_plugins = vim.g.enfocado_plugins
@@ -94,22 +84,68 @@ local function plugin_is_activated(name)
   elseif enfocado_plugins == "all"  then
     return 1
   else
-    if enfocado_plugins[name] == true then
-      return 1
+    for _,v in pairs(enfocado_plugins) do
+      if v == name then
+        return 1
+      end
     end
   end
 end
 
 local function highlighter(group, set_attr, bg_color, fg_color, set_sp)
+      local bold = false
+      local italic = false
+      local underline = false
+      local undercurl = false
+
+      if set_attr[1] == "NONE" then
+        bold = false
+        italic = false
+        underline = false
+        undercurl = false
+      elseif  set_attr[1] == "bold" then
+        bold = true
+        italic = false
+        underline = false
+        undercurl = false
+      elseif  set_attr[1] == "italic" then
+        bold = false
+        italic = true
+        underline = false
+        undercurl = false
+      elseif set_attr[1] == "bold,italic" then
+        bold = true
+        italic = true
+        underline = false
+        undercurl = false
+      elseif set_attr[1] == "underline" then
+        bold = false
+        italic = false
+        underline = true
+        undercurl = false
+      elseif set_attr[1] == "undercurl" then
+        bold = false
+        italic = false
+        underline = false
+        undercurl = true
+      end
+
     vim.api.nvim_set_hl(0, group, {
-      bg=bg_color[0],
-      fg=fg_color[0],
-      ctermbg=bg_color[0],
-      ctermfg=fg_color[0],
-      gui = set_attr[0],
-      term = set_attr[1],
-      cterm = set_attr[1],
-      sp = set_sp[0]
+      bg=bg_color[1],
+      fg=fg_color[1],
+      sp = set_sp[1],
+      bold = bold,
+      italic = italic,
+      underline = underline,
+      undercurl = undercurl,
+
+      ctermbg=bg_color[2],
+      ctermfg=fg_color[2],
+      cterm = {
+        bold = bold,
+        italic = italic,
+        underline = underline or undercurl,
+      }
     })
 end
 
@@ -117,9 +153,10 @@ local function highlight_linker(group1, group2)
   vim.api.nvim_set_hl(0, group1, { link = group2 })
 end
 
--- ------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
 -- SECTION: Neo(Vim) base groups highlighting.
--- ------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- Enfocado style diffs.
 if enfocado_style == 'neon' then
   -- Neon interfaz.
@@ -440,7 +477,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- dashboard-nvim: {{{
-  if plugin_is_activated('dashboard') then
+  if plugin_is_activated('dashboard') == 1 then
     highlight_linker("DashboardHeader", "Accent")
     highlight_linker("DashboardCenter", "Dimmed")
     highlight_linker("DashboardShortCut", "Dimmed")
