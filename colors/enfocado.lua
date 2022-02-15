@@ -72,7 +72,6 @@ local bold_italic   = { "bold,italic"  , 'bold,italic'   }
 local italic        = { "italic"       , 'italic'        }
 local underline     = { "underline"    , 'underline'     }
 local undercurl     = { "undercurl"    , 'underline'     }
--- local strikethrough = { "strikethrough", "strikethrough" }
 
 -- " Enfocado configuration variables are initialized.
 local enfocado_style   = vim.g.enfocado_style
@@ -174,7 +173,7 @@ if enfocado_style == 'neon' then
 
   -- Neon syntax.
   highlighter('Function', italic, none, br_magenta, none)
-  highlighter('FunctionBuiltin', none, none, br_green, none)
+  highlighter('FunctionBuiltin', italic, none, br_green, none)
   highlighter('Identifier', none, none, magenta, none)
   highlighter('IdentifierBuiltin', none, none, green, none)
   highlighter('PreProc', none, none, br_violet, none)
@@ -195,7 +194,7 @@ else
 
   -- Nature syntax.
   highlighter('Function', italic, none, br_green, none)
-  highlighter('FunctionBuiltin', none, none, br_magenta, none)
+  highlighter('FunctionBuiltin', italic, none, br_magenta, none)
   highlighter('Identifier', none, none, green, none)
   highlighter('IdentifierBuiltin', none, none, magenta, none)
   highlighter('PreProc', none, none, br_blue, none)
@@ -277,8 +276,8 @@ highlight_linker("QuickFixLine", "Search")
 highlight_linker("Substitute", "Search")
 highlight_linker("TermCursorNC", "None")
 highlight_linker("Whitespace", "NonText")
-highlighter("FloatShadow", none, black, nil, nil)
-highlighter("FloatShadowThrough", none, black, nil, nil)
+highlighter("FloatShadow", none, black, nil, nil) -- TODO: Add blend 60.
+highlighter("FloatShadowThrough", none, black, nil, nil) -- TODO: Add blend 100.
 
 -- General syntax.
 highlighter('Comment', italic, none, dim_0, none)
