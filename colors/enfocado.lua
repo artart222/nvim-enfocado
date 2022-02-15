@@ -12,7 +12,7 @@
 -- " The Enfocado theme is initialized.
 vim.g.colors_name = "enfocado"
 
--- " Vim's dark mode is on.
+-- " NeoVim's dark mode is on.
 vim.opt.background = "dark"
 
 -- All highlights are removed.
@@ -22,6 +22,7 @@ if vim.g.colors_name then
 end
 
 
+-- Selenized black color scheme variables are declared.
 local bg_0       = { "#181818", 234 }
 local bg_1       = { "#252525", 235 }
 local bg_2       = { "#3B3B3B", 237 }
@@ -46,7 +47,7 @@ local br_orange  = { "#FA9153", 209 }
 local br_violet  = { "#B891F5", 141 }
 local black      = { "#000000", 16  }
 
--- Neovim terminal variables are assigned.
+-- NeoVim terminal variables are assigned.
 vim.g.terminal_color_0  = "#252525"
 vim.g.terminal_color_1  = "#ED4A46"
 vim.g.terminal_color_2  = "#70B433"
@@ -65,12 +66,13 @@ vim.g.terminal_color_14 = "#56D8C9"
 vim.g.terminal_color_15 = "#DEDEDE"
 
 -- Attributes are declared.
-local none        = { 'NONE'         , 'NONE'          }
-local bold        = { 'bold'         , 'bold'          }
-local bold_italic = { 'bold,italic'  , 'bold,italic'   }
-local italic      = { 'italic'       , 'italic'        }
-local underline   = { 'underline'    , 'underline'     }
-local undercurl   = { 'undercurl'    , 'underline'     }
+local none          = { "NONE"         , 'NONE'          }
+local bold          = { "bold"         , 'bold'          }
+local bold_italic   = { "bold,italic"  , 'bold,italic'   }
+local italic        = { "italic"       , 'italic'        }
+local underline     = { "underline"    , 'underline'     }
+local undercurl     = { "undercurl"    , 'underline'     }
+-- local strikethrough = { "strikethrough", "strikethrough" }
 
 -- " Enfocado configuration variables are initialized.
 local enfocado_style   = vim.g.enfocado_style
@@ -92,11 +94,27 @@ local function plugin_is_activated(name)
   end
 end
 
+-- A function is created to make using nvim_set_hl easier.
 local function highlighter(group, set_attr, bg_color, fg_color, set_sp)
       local bold = false
       local italic = false
       local underline = false
       local undercurl = false
+
+      local fg_color = fg_color
+      if type(fg_color) == "nil" then
+        fg_color = { "nil", "nil" }
+      end
+
+      local bg_color = bg_color
+      if type(bg_color) == "nil" then
+        bg_color = { "nil", "nil" }
+      end
+
+      local set_sp = set_sp
+      if type(set_sp) == "nil" then
+        set_sp = { "nil", "nil" }
+      end
 
       if set_attr[1] == "NONE" then
         bold = false
@@ -105,28 +123,14 @@ local function highlighter(group, set_attr, bg_color, fg_color, set_sp)
         undercurl = false
       elseif  set_attr[1] == "bold" then
         bold = true
-        italic = false
-        underline = false
-        undercurl = false
       elseif  set_attr[1] == "italic" then
-        bold = false
         italic = true
-        underline = false
-        undercurl = false
       elseif set_attr[1] == "bold,italic" then
         bold = true
         italic = true
-        underline = false
-        undercurl = false
       elseif set_attr[1] == "underline" then
-        bold = false
-        italic = false
         underline = true
-        undercurl = false
       elseif set_attr[1] == "undercurl" then
-        bold = false
-        italic = false
-        underline = false
         undercurl = true
       end
 
@@ -149,6 +153,7 @@ local function highlighter(group, set_attr, bg_color, fg_color, set_sp)
     })
 end
 
+-- A function is created to link to highlight groups.
 local function highlight_linker(group1, group2)
   vim.api.nvim_set_hl(0, group1, { link = group2 })
 end
@@ -272,8 +277,8 @@ highlight_linker("QuickFixLine", "Search")
 highlight_linker("Substitute", "Search")
 highlight_linker("TermCursorNC", "None")
 highlight_linker("Whitespace", "NonText")
---[[ highlighte! FloatShadow ctermbg=16 guibg=#000000 blend=60
-highlighte! FloatShadowThrough ctermbg=16 guibg=#000000 blend=100 ]]
+highlighter("FloatShadow", none, black, nil, nil)
+highlighter("FloatShadowThrough", none, black, nil, nil)
 
 -- General syntax.
 highlighter('Comment', italic, none, dim_0, none)
@@ -306,7 +311,7 @@ highlight_linker("String", "Constant")
 highlight_linker("Structure", "Type")
 highlight_linker("Tag", "Statement")
 highlight_linker("Typedef", "Type")
--- highlight! Underlined term=underline cterm=underline gui=underline
+highlighter("Underlined", underline, nil, nil, nil)
 
 -- Neovim diagnostic.
 highlighter('DiagnosticError', none, none, br_red, none)
@@ -329,9 +334,9 @@ highlight_linker("DiagnosticVirtualTextError", "DiagnosticError")
 highlight_linker("DiagnosticVirtualTextHint", "DiagnosticHint")
 highlight_linker("DiagnosticVirtualTextInfo", "DiagnosticInfo")
 highlight_linker("DiagnosticVirtualTextWarn", "DiagnosticWarn")
--- ------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- SECTION: Filetypes syntax groups highlighting.
--- ------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- Diff.
 highlight_linker("diffAdded", "DiffAdd")
 highlight_linker("diffBDiffer", "Text")
@@ -350,18 +355,20 @@ highlight_linker("diffOldFile", "Text")
 highlight_linker("diffOnly", "Text")
 highlight_linker("diffRemoved", "DiffDelete")
 highlight_linker("diffSubname", "Title")
--- ------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- SECTION: Plugins for Neo(Vim) groups highlighting.
--- ------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- coc.nvim: {{{
   if plugin_is_activated('coc') then
     -- Coc markdown.
     highlight_linker("CocMarkdownHeader", "Title")
     highlight_linker("CocMarkdownLink", "Link")
-    --[[ highlight! CocBold term=bold cterm=bold gui=bold
-    highlight! CocItalic term=italic cterm=italic gui=italic
-    highlight! CocStrikeThrough term=strikethrough cterm=strikethrough gui=strikethrough
-    highlight! CocUnderline term=underline cterm=underline gui=underline ]]
+    highlighter("CocBold", bold, nil, nil, nil)
+    highlighter("CocItalic", italic, nil, nil, nil)
+    -- TODO: It seems currently we don't have strikethrough for nvim_set_hl.
+    -- Add strikethrough when for CocStrikeThrough when it's available.
+    -- highlighter("CocStrikeThrough", strikethrough, nil, nil, nil)
+    highlighter("CocUnderline", underline, nil, nil, nil)
 
     -- " Coc diagnostics.
     highlight_linker("CocErrorHighlight", "DiagnosticUnderlineError")
@@ -486,24 +493,25 @@ highlight_linker("diffSubname", "Title")
 -- }}}
 -- fzf.vim: {{{
   if plugin_is_activated('fzf') then
+    -- TODO: Convert this to lua.
     -- fzf apply enfocado groups.
-    -- if !exists('g:fzf_colors')
-      -- let g:fzf_colors = {
-            -- \ 'bg'     : [ 'bg', 'NormalFloat'    ],
-            -- \ 'bg+'    : [ 'bg', 'Search'         ],
-            -- \ 'border' : [ 'fg', 'FloatBorder'    ],
-            -- \ 'fg'     : [ 'fg', 'NormalFloat'    ],
-            -- \ 'fg+'    : [ 'fg', 'NormalFloat'    ],
-            -- \ 'header' : [ 'fg', 'Title'          ],
-            -- \ 'hl'     : [ 'fg', 'Accent'         ],
-            -- \ 'hl+'    : [ 'fg', 'Search'         ],
-            -- \ 'info'   : [ 'fg', 'DiagnosticInfo' ],
-            -- \ 'marker' : [ 'fg', 'NormalFloat'    ],
-            -- \ 'pointer': [ 'fg', 'NormalFloat'    ],
-            -- \ 'prompt' : [ 'fg', 'Dimmed'         ],
-            -- \ 'spinner': [ 'fg', 'DiagnosticInfo' ]
-          -- \ }
-    -- end
+    if type(vim.g.fzf_colors) ~= "nil" then
+      vim.g.fzf_colors = {
+        ["bg"]      = { "bg", "NormalFloat"    },
+        ["bg+"]     = { "bg", "Search"         },
+        ["border"]  = { "fg", "FloatBorder"    },
+        ["fg"]      = { "fg", "NormalFloat"    },
+        ["fg+"]     = { "fg", "NormalFloat"    },
+        ["header"]  = { "fg", "Title"          },
+        ["hl"]      = { "fg", "Accent"         },
+        ["hl+"]     = { "fg", "Search"         },
+        ["info"]    = { "fg", "DiagnosticInfo" },
+        ["marker"]  = { "fg", "NormalFloat"    },
+        ["pointer"] = { "fg", "NormalFloat"    },
+        ["prompt"]  = { "fg", "Dimmed"         },
+        ["spinner"] = { "fg", "DiagnosticInfo" },
+      }
+    end
 
     -- Others FZF groups.
     highlighter("Fzf1", bold, bg_2, dim_0, none)
@@ -704,10 +712,12 @@ highlight_linker("diffSubname", "Title")
     highlight_linker("TSVariable", "Identifier")
     highlight_linker("TSVariableBuiltin", "IdentifierBuiltin")
     highlight_linker("TSWarning", "DiagnosticWarn")
-    --[[ highlight! "TSEmphasis", "term=italic cterm=italic gui=italic"
-    highlight! TSStrike term=strikethrough cterm=strikethrough gui=strikethrough
-    highlight! TSStrong term=bold cterm=bold gui=bold
-    highlight! TSUnderline term=underline cterm=underline gui=underline ]]
+    highlighter("TSEmphasis", italic, nil, nil, nil)
+    highlighter("TSStrong", bold, nil, nil, nil)
+    highlighter("TSUnderline", underline, nil, nil, nil)
+    -- TODO: It seems currently we don't have strikethrough for nvim_set_hl.
+    -- Add strikethrough when for CocStrikeThrough when it's available.
+    -- highlight( TSStrike term=strikethrough cterm=strikethrough gui=strikethrough
   end
 -- }}}
 -- nvim-tree.lua: {{{
@@ -778,27 +788,27 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- rainbow: {{{
-  --[[ if plugin_is_activated('rainbow') then
+  if plugin_is_activated('rainbow') then
     if enfocado_style == "neon" then
-      let rainbow_guifgs   = [ violet[0], cyan[0], magenta[0], br_violet[0] ]
-      let rainbow_ctermfgs = [ violet[1], cyan[1], magenta[1], br_violet[1] ]
+      local rainbow_guifgs   = { violet[1], cyan[1], magenta[1], br_violet[1] }
+      local rainbow_ctermfgs = { violet[2], cyan[2], magenta[2], br_violet[2] }
     else
-      let rainbow_guifgs   = [ blue[0], cyan[0], green[0], br_blue[0] ]
-      let rainbow_ctermfgs = [ blue[1], cyan[1], green[1], br_blue[1] ]
+      local rainbow_guifgs   = { blue[1], cyan[1], green[1], br_blue[1] }
+      local rainbow_ctermfgs = { blue[2], cyan[2], green[2], br_blue[2] }
     end
 
-    if !exists('g:rainbow_conf') then
-      let g:rainbow_conf = {}
+    if type(vim.g.rainbow_conf) == "nil" then
+      vim.g.rainbow_conf = {}
     end
 
-    if !has_key(g:rainbow_conf, 'guifgs') then
-      let g:rainbow_conf['guifgs'] = rainbow_guifgs
+    if vim.g.rainbow_conf["guifgs"] then
+      vim.g.rainbow_conf['guifgs'] = vim.g.rainbow_guifgs
     end
 
-    if !has_key(g:rainbow_conf, 'ctermfgs') then
-      let g:rainbow_conf['ctermfgs'] = rainbow_ctermfgs
+    if vim.g.rainbow_conf["ctermfgs"] then
+      vim.g.rainbow_conf['ctermfgs'] = vim.g.rainbow_ctermfgs
     end
-  end ]]
+  end
 --}}}
 -- telescope.nvim: {{{
   if plugin_is_activated('telescope') then
@@ -928,7 +938,7 @@ highlight_linker("diffSubname", "Title")
     highlight_linker("SignifySignDeleteFirstLine", "DiffDelete")
   end
 -- }}}
--- vim-which-key: {{{
+-- which-key.nvim: {{{
   if plugin_is_activated('which-key') then
     highlight_linker("WhichKey", "Text")
     highlight_linker("WhichKeyDesc", "Text")
