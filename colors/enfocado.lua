@@ -66,14 +66,14 @@ vim.g.terminal_color_14 = "#56D8C9"
 vim.g.terminal_color_15 = "#DEDEDE"
 
 -- Attributes are declared.
-local none          = { "NONE"         , 'NONE'          }
-local bold          = { "bold"         , 'bold'          }
-local bold_italic   = { "bold,italic"  , 'bold,italic'   }
-local italic        = { "italic"       , 'italic'        }
-local underline     = { "underline"    , 'underline'     }
-local undercurl     = { "undercurl"    , 'underline'     }
+local none          = { "NONE"         , "NONE"          }
+local bold          = {{ bold = true } , { bold = true }}
+local bold_italic   = {{ bold = true, italic = true }, { bold = true, italic = true }}
+local italic        = {{ italic = true }, { italic = true }}
+local underline     = {{ underline = true }, { underline = true }}
+local undercurl     = {{ undercurl = true }, { underline=true }}
 
--- " Enfocado configuration variables are initialized.
+-- Enfocado configuration variables are initialized.
 local enfocado_style   = vim.g.enfocado_style
 local enfocado_plugins = vim.g.enfocado_plugins
 
@@ -95,11 +95,6 @@ end
 
 -- A function is created to make using nvim_set_hl easier.
 local function highlighter(group, set_attr, bg_color, fg_color, set_sp)
-      local bold = false
-      local italic = false
-      local underline = false
-      local undercurl = false
-
       local fg_color = fg_color
       if type(fg_color) == "nil" then
         fg_color = { "nil", "nil" }
@@ -115,39 +110,20 @@ local function highlighter(group, set_attr, bg_color, fg_color, set_sp)
         set_sp = { "nil", "nil" }
       end
 
+      local set_attr = set_attr
       if set_attr[1] == "NONE" then
-        bold = false
-        italic = false
-        underline = false
-        undercurl = false
-      elseif  set_attr[1] == "bold" then
-        bold = true
-      elseif  set_attr[1] == "italic" then
-        italic = true
-      elseif set_attr[1] == "bold,italic" then
-        bold = true
-        italic = true
-      elseif set_attr[1] == "underline" then
-        underline = true
-      elseif set_attr[1] == "undercurl" then
-        undercurl = true
+        set_attr = {{ nil }, { nil }}
       end
 
     vim.api.nvim_set_hl(0, group, {
       bg=bg_color[1],
       fg=fg_color[1],
-      sp = set_sp[1],
-      bold = bold,
-      italic = italic,
-      underline = underline,
-      undercurl = undercurl,
-
       ctermbg=bg_color[2],
       ctermfg=fg_color[2],
+      unpack(set_attr[1]),
+      sp = set_sp[1],
       cterm = {
-        bold = bold,
-        italic = italic,
-        underline = underline or undercurl,
+        unpack(set_attr[2])
       }
     })
 end
@@ -162,110 +138,110 @@ end
 -- SECTION: Neo(Vim) base groups highlighting.
 -------------------------------------------------------------------------------
 -- Enfocado style diffs.
-if enfocado_style == 'neon' then
+if enfocado_style == "neon" then
   -- Neon interfaz.
-  highlighter('Accent', none, none, br_magenta, none)
-  highlighter('FloatBorder', none, bg_1, magenta, none)
-  highlighter('IncSearch', bold, bg_2, br_magenta, none)
-  highlighter('Search', bold, bg_2, br_magenta, none)
-  highlighter('ToolbarButton', none, magenta, bg_1, none)
-  highlighter('WildMenu', bold, bg_2, br_magenta, none)
+  highlighter("Accent", none, none, br_magenta, none)
+  highlighter("FloatBorder", none, bg_1, magenta, none)
+  highlighter("IncSearch", bold, bg_2, br_magenta, none)
+  highlighter("Search", bold, bg_2, br_magenta, none)
+  highlighter("ToolbarButton", none, magenta, bg_1, none)
+  highlighter("WildMenu", bold, bg_2, br_magenta, none)
 
   -- Neon syntax.
-  highlighter('Function', italic, none, br_magenta, none)
-  highlighter('FunctionBuiltin', italic, none, br_green, none)
-  highlighter('Identifier', none, none, magenta, none)
-  highlighter('IdentifierBuiltin', none, none, green, none)
-  highlighter('PreProc', none, none, br_violet, none)
-  highlighter('Special', none, none, br_blue, none)
-  highlighter('Statement', none, none, br_violet, none)
-  highlighter('StatementBuiltin', none, none, br_blue, none)
-  highlighter('Struct', bold_italic, none, br_magenta, none)
-  highlighter('Type', none, none, violet, none)
-  highlighter('TypeBuiltin', none, none, blue, none)
+  highlighter("Function", italic, none, br_magenta, none)
+  highlighter("FunctionBuiltin", italic, none, br_green, none)
+  highlighter("Identifier", none, none, magenta, none)
+  highlighter("IdentifierBuiltin", none, none, green, none)
+  highlighter("PreProc", none, none, br_violet, none)
+  highlighter("Special", none, none, br_blue, none)
+  highlighter("Statement", none, none, br_violet, none)
+  highlighter("StatementBuiltin", none, none, br_blue, none)
+  highlighter("Struct", bold_italic, none, br_magenta, none)
+  highlighter("Type", none, none, violet, none)
+  highlighter("TypeBuiltin", none, none, blue, none)
 else
   -- Nature interfaz.
-  highlighter('Accent', none, none, br_green, none)
-  highlighter('FloatBorder', none, bg_1, green, none)
-  highlighter('IncSearch', bold, bg_2, br_green, none)
-  highlighter('Search', bold, bg_2, br_green, none)
-  highlighter('ToolbarButton', none, green, bg_1, none)
-  highlighter('WildMenu', bold, bg_2, br_green, none)
+  highlighter("Accent", none, none, br_green, none)
+  highlighter("FloatBorder", none, bg_1, green, none)
+  highlighter("IncSearch", bold, bg_2, br_green, none)
+  highlighter("Search", bold, bg_2, br_green, none)
+  highlighter("ToolbarButton", none, green, bg_1, none)
+  highlighter("WildMenu", bold, bg_2, br_green, none)
 
   -- Nature syntax.
-  highlighter('Function', italic, none, br_green, none)
-  highlighter('FunctionBuiltin', italic, none, br_magenta, none)
-  highlighter('Identifier', none, none, green, none)
-  highlighter('IdentifierBuiltin', none, none, magenta, none)
-  highlighter('PreProc', none, none, br_blue, none)
-  highlighter('Special', none, none, br_violet, none)
-  highlighter('Statement', none, none, br_blue, none)
-  highlighter('StatementBuiltin', none, none, br_violet, none)
-  highlighter('Struct', bold_italic, none, br_green, none)
-  highlighter('Type', none, none, blue, none)
-  highlighter('TypeBuiltin', none, none, violet, none)
+  highlighter("Function", italic, none, br_green, none)
+  highlighter("FunctionBuiltin", italic, none, br_magenta, none)
+  highlighter("Identifier", none, none, green, none)
+  highlighter("IdentifierBuiltin", none, none, magenta, none)
+  highlighter("PreProc", none, none, br_blue, none)
+  highlighter("Special", none, none, br_violet, none)
+  highlighter("Statement", none, none, br_blue, none)
+  highlighter("StatementBuiltin", none, none, br_violet, none)
+  highlighter("Struct", bold_italic, none, br_green, none)
+  highlighter("Type", none, none, blue, none)
+  highlighter("TypeBuiltin", none, none, violet, none)
 end
 
 -- General interfaz.
-highlighter('ColorColumn', none, bg_1, none, none)
-highlighter('Conceal', none, none, bg_2, none)
-highlighter('Cursor', none, bg_1, fg_0, none)
-highlighter('CursorColumn', none, bg_1, none, none)
-highlighter('CursorLine', none, bg_1, none, none)
-highlighter('CursorLineNr', none, none, dim_0, none)
-highlighter('DiffAdd', none, none, green, none)
-highlighter('DiffChange', none, none, yellow, none)
-highlighter('DiffDelete', none, none, red, none)
-highlighter('DiffText', none, bg_2, yellow, none)
-highlighter('Dimmed', none, none, dim_0, none)
-highlighter('Directory', none, none, dim_0, none)
-highlighter('ErrorMsg', none, none, br_red, none)
-highlighter('Folded', none, none, dim_0, none)
-highlighter('FoldColumn', none, none, dim_0, none)
-highlighter('Ignore', none, none, bg_2, none)
-highlighter('lCursor', none, bg_1, fg_0, none)
-highlighter('LineNr', none, none, bg_2, none)
-highlighter('MatchParen', none, bg_2, none, none)
-highlighter('ModeMsg', none, none, dim_0, none)
-highlighter('MoreMsg', none, none, br_yellow, none)
-highlighter('None', none, none, none, none)
-highlighter('NonText', none, none, bg_2, none)
-highlighter('Normal', none, bg_0, fg_0, none)
-highlighter('NormalFloat', none, bg_1, fg_0, none)
-highlighter('NormalNC', none, bg_0, fg_0, none)
-highlighter('NvimInternalError', none, none, br_red, none)
-highlighter('Pmenu', none, bg_1, fg_0, none)
-highlighter('PmenuSbar', none, bg_1, none, none)
-highlighter('PmenuSel', none, bg_2, none, none)
-highlighter('PmenuThumb', none, bg_2, none, none)
-highlighter('Question', none, none, br_yellow, none)
-highlighter('RedrawDebugClear', none, none, br_yellow, none)
-highlighter('RedrawDebugComposed', none, none, br_green, none)
-highlighter('RedrawDebugNormal', none, none, fg_1, none)
-highlighter('RedrawDebugRecompose', none, none, br_red, none)
-highlighter('SignColumn', none, none, none, none)
-highlighter('SpecialKey', none, none, bg_2, none)
-highlighter('SpellBad', undercurl, none, none, red)
-highlighter('SpellCap', undercurl, none, none, blue)
-highlighter('SpellLocal', undercurl, none, none, cyan)
-highlighter('SpellRare', undercurl, none, none, magenta)
-highlighter('StatusLine', none, bg_1, dim_0, none)
-highlighter('StatusLineNC', none, bg_1, bg_2, none)
-highlighter('StatuslineTerm', none, bg_1, dim_0, none)
+highlighter("ColorColumn", none, bg_1, none, none)
+highlighter("Conceal", none, none, bg_2, none)
+highlighter("Cursor", none, bg_1, fg_0, none)
+highlighter("CursorColumn", none, bg_1, none, none)
+highlighter("CursorLine", none, bg_1, none, none)
+highlighter("CursorLineNr", none, none, dim_0, none)
+highlighter("DiffAdd", none, none, green, none)
+highlighter("DiffChange", none, none, yellow, none)
+highlighter("DiffDelete", none, none, red, none)
+highlighter("DiffText", none, bg_2, yellow, none)
+highlighter("Dimmed", none, none, dim_0, none)
+highlighter("Directory", none, none, dim_0, none)
+highlighter("ErrorMsg", none, none, br_red, none)
+highlighter("Folded", none, none, dim_0, none)
+highlighter("FoldColumn", none, none, dim_0, none)
+highlighter("Ignore", none, none, bg_2, none)
+highlighter("lCursor", none, bg_1, fg_0, none)
+highlighter("LineNr", none, none, bg_2, none)
+highlighter("MatchParen", none, bg_2, none, none)
+highlighter("ModeMsg", none, none, dim_0, none)
+highlighter("MoreMsg", none, none, br_yellow, none)
+highlighter("None", none, none, none, none)
+highlighter("NonText", none, none, bg_2, none)
+highlighter("Normal", none, bg_0, fg_0, none)
+highlighter("NormalFloat", none, bg_1, fg_0, none)
+highlighter("NormalNC", none, bg_0, fg_0, none)
+highlighter("NvimInternalError", none, none, br_red, none)
+highlighter("Pmenu", none, bg_1, fg_0, none)
+highlighter("PmenuSbar", none, bg_1, none, none)
+highlighter("PmenuSel", none, bg_2, none, none)
+highlighter("PmenuThumb", none, bg_2, none, none)
+highlighter("Question", none, none, br_yellow, none)
+highlighter("RedrawDebugClear", none, none, br_yellow, none)
+highlighter("RedrawDebugComposed", none, none, br_green, none)
+highlighter("RedrawDebugNormal", none, none, fg_1, none)
+highlighter("RedrawDebugRecompose", none, none, br_red, none)
+highlighter("SignColumn", none, none, none, none)
+highlighter("SpecialKey", none, none, bg_2, none)
+highlighter("SpellBad", undercurl, none, none, red)
+highlighter("SpellCap", undercurl, none, none, blue)
+highlighter("SpellLocal", undercurl, none, none, cyan)
+highlighter("SpellRare", undercurl, none, none, magenta)
+highlighter("StatusLine", none, bg_1, dim_0, none)
+highlighter("StatusLineNC", none, bg_1, bg_2, none)
+highlighter("StatuslineTerm", none, bg_1, dim_0, none)
 
-highlighter('StatuslineTermNC', none, bg_1, bg_2, none)
-highlighter('Success', none, none, br_green, none)
-highlighter('TabLine', none, bg_1, bg_2, none)
-highlighter('TabLineFill', none, bg_1, bg_2, none)
-highlighter('TabLineSel', none, none, dim_0, none)
-highlighter('TermCursor', none, fg_0, bg_1, none)
-highlighter('Title', bold, none, fg_1, none)
-highlighter('ToolbarLine', none, bg_1, dim_0, none)
-highlighter('VertSplit', none, none, black, none)
-highlighter('Visual', none, bg_2, none, none)
-highlighter('VisualNC', none, bg_2, none, none)
-highlighter('VisualNOS', none, bg_2, none, none)
-highlighter('WarningMsg', none, none, br_orange, none)
+highlighter("StatuslineTermNC", none, bg_1, bg_2, none)
+highlighter("Success", none, none, br_green, none)
+highlighter("TabLine", none, bg_1, bg_2, none)
+highlighter("TabLineFill", none, bg_1, bg_2, none)
+highlighter("TabLineSel", none, none, dim_0, none)
+highlighter("TermCursor", none, fg_0, bg_1, none)
+highlighter("Title", bold, none, fg_1, none)
+highlighter("ToolbarLine", none, bg_1, dim_0, none)
+highlighter("VertSplit", none, none, black, none)
+highlighter("Visual", none, bg_2, none, none)
+highlighter("VisualNC", none, bg_2, none, none)
+highlighter("VisualNOS", none, bg_2, none, none)
+highlighter("WarningMsg", none, none, br_orange, none)
 highlight_linker("EndOfBuffer", "NonText")
 highlight_linker("Line", "ColorColumn")
 highlight_linker("LineNrAbov", "LineNr")
@@ -276,16 +252,16 @@ highlight_linker("QuickFixLine", "Search")
 highlight_linker("Substitute", "Search")
 highlight_linker("TermCursorNC", "None")
 highlight_linker("Whitespace", "NonText")
-highlighter("FloatShadow", none, black, nil, nil) -- TODO: Add blend 60.
-highlighter("FloatShadowThrough", none, black, nil, nil) -- TODO: Add blend 100.
+--[[ highlighter("FloatShadow", none, black, nil, nil) -- TODO: Add blend 60.
+highlighter("FloatShadowThrough", none, black, nil, nil) -- TODO: Add blend 100. ]]
 
 -- General syntax.
-highlighter('Comment', italic, none, dim_0, none)
-highlighter('Constant', none, none, cyan, none)
-highlighter('Error', none, none, br_red, none)
-highlighter('Link', underline, none, br_cyan, br_cyan)
-highlighter('Text', none, none, fg_0, none)
-highlighter('Todo', bold, br_cyan, bg_1, none)
+highlighter("Comment", italic, none, dim_0, none)
+highlighter("Constant", none, none, cyan, none)
+highlighter("Error", none, none, br_red, none)
+highlighter("Link", underline, none, br_cyan, br_cyan)
+highlighter("Text", none, none, fg_0, none)
+highlighter("Todo", bold, br_cyan, bg_1, none)
 highlight_linker("Boolean", "TypeBuiltin")
 highlight_linker("Character", "Constant")
 highlight_linker("Conditional", "Statement")
@@ -310,21 +286,21 @@ highlight_linker("String", "Constant")
 highlight_linker("Structure", "Type")
 highlight_linker("Tag", "Statement")
 highlight_linker("Typedef", "Type")
-highlighter("Underlined", underline, nil, nil, nil)
+-- highlighter("Underlined", underline, nil, nil, nil)
 
 -- Neovim diagnostic.
-highlighter('DiagnosticError', none, none, br_red, none)
-highlighter('DiagnosticHint', none, none, br_blue, none)
-highlighter('DiagnosticInfo', none, none, br_yellow, none)
-highlighter('DiagnosticWarn', none, none, br_orange, none)
-highlighter('DiagnosticFloatingError', none, bg_1, br_red, none)
-highlighter('DiagnosticFloatingHint', none, bg_1, br_blue, none)
-highlighter('DiagnosticFloatingInfo', none, bg_1, br_yellow, none)
-highlighter('DiagnosticFloatingWarn', none, bg_1, br_orange, none)
-highlighter('DiagnosticUnderlineError', underline, none, br_red, br_red)
-highlighter('DiagnosticUnderlineHint', underline, none, br_blue, br_blue)
-highlighter('DiagnosticUnderlineInfo', underline, none, br_yellow, br_yellow)
-highlighter('DiagnosticUnderlineWarn', underline, none, br_orange, br_orange)
+highlighter("DiagnosticError", none, none, br_red, none)
+highlighter("DiagnosticHint", none, none, br_blue, none)
+highlighter("DiagnosticInfo", none, none, br_yellow, none)
+highlighter("DiagnosticWarn", none, none, br_orange, none)
+highlighter("DiagnosticFloatingError", none, bg_1, br_red, none)
+highlighter("DiagnosticFloatingHint", none, bg_1, br_blue, none)
+highlighter("DiagnosticFloatingInfo", none, bg_1, br_yellow, none)
+highlighter("DiagnosticFloatingWarn", none, bg_1, br_orange, none)
+highlighter("DiagnosticUnderlineError", underline, none, br_red, br_red)
+highlighter("DiagnosticUnderlineHint", underline, none, br_blue, br_blue)
+highlighter("DiagnosticUnderlineInfo", underline, none, br_yellow, br_yellow)
+highlighter("DiagnosticUnderlineWarn", underline, none, br_orange, br_orange)
 highlight_linker("DiagnosticSignError", "DiagnosticError")
 highlight_linker("DiagnosticSignHint", "DiagnosticHint")
 highlight_linker("DiagnosticSignInfo", "DiagnosticInfo")
@@ -358,7 +334,7 @@ highlight_linker("diffSubname", "Title")
 -- SECTION: Plugins for Neo(Vim) groups highlighting.
 -------------------------------------------------------------------------------
 -- coc.nvim: {{{
-  if plugin_is_activated('coc') then
+  if plugin_is_activated("coc") then
     -- Coc markdown.
     highlight_linker("CocMarkdownHeader", "Title")
     highlight_linker("CocMarkdownLink", "Link")
@@ -478,12 +454,12 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- copilot.vim: {{{
-  if plugin_is_activated('copilot') then
+  if plugin_is_activated("copilot") then
     highlighter("CopilotSuggestion", none, bg_0, dim_0, none)
   end
 -- }}}
 -- dashboard-nvim: {{{
-  if plugin_is_activated('dashboard') == 1 then
+  if plugin_is_activated("dashboard") == 1 then
     highlight_linker("DashboardHeader", "Accent")
     highlight_linker("DashboardCenter", "Dimmed")
     highlight_linker("DashboardShortCut", "Dimmed")
@@ -491,7 +467,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- fzf.vim: {{{
-  if plugin_is_activated('fzf') then
+  if plugin_is_activated("fzf") then
     -- TODO: Convert this to lua.
     -- fzf apply enfocado groups.
     if type(vim.g.fzf_colors) ~= "nil" then
@@ -519,7 +495,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- nerdtree: {{{
-  if plugin_is_activated('nerdtree') then
+  if plugin_is_activated("nerdtree") then
     highlighter("NERDTreeFile", none, none, dim_0, none)
     highlight_linker("NERDTreeBookmark", "Dimmed")
     highlight_linker("NERDTreeBookmarkHeader", "Title")
@@ -544,7 +520,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- netrw: {{{
-  if plugin_is_activated('netrw') then
+  if plugin_is_activated("netrw") then
     highlight_linker("netrwClassify", "Dimmed")
     highlight_linker("netrwCmdSep", "Ignore")
     highlight_linker("netrwComment", "Comment")
@@ -559,7 +535,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- nvim-cmp: {{{
-  if plugin_is_activated('cmp') then
+  if plugin_is_activated("cmp") then
     highlight_linker("CmpItemAbbrDefault", "Text")
     highlight_linker("CmpItemAbbrDeprecatedDefault", "Error")
     highlight_linker("CmpItemAbbrMatchDefault", "Accent")
@@ -594,7 +570,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- nvim-lspconfig: {{{
-  if plugin_is_activated('lsp') then
+  if plugin_is_activated("lsp") then
     highlight_linker("LspCodeLens", "Dimmed")
     highlight_linker("LspCodeLensSeparator", "NonText")
     highlight_linker("LspReferenceRead", "Visual")
@@ -604,7 +580,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- nvim-lsp-installer: {{{
-  if plugin_is_activated('lsp-installer') then
+  if plugin_is_activated("lsp-installer") then
     highlight_linker("LspInstallerHeader", "Title")
     highlight_linker("LspInstallerServerExpanded", "Text")
     highlight_linker("LspInstallerHeading", "Title")
@@ -619,7 +595,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- nvim-notify: {{{
-  if plugin_is_activated('notify') then
+  if plugin_is_activated("notify") then
     highlighter("NotifyERRORBorder", none, none, br_red, none)
     highlighter("NotifyDEBUGBorder", none, none, dim_0, none)
     highlighter("NotifyINFOBorder", none, none, br_yellow, none)
@@ -645,12 +621,12 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- nvim-scrollview: {{{
-  if plugin_is_activated('scrollview') then
+  if plugin_is_activated("scrollview") then
     highlight_linker("ScrollView", "Line")
   end
 --}}}
 -- nvim-treesitter: {{{
-  if plugin_is_activated('treesitter') then
+  if plugin_is_activated("treesitter") then
     highlighter("TSLiteral", italic, none, fg_0, none)
     highlighter("TSNote", bold, br_green, bg_1, none)
     highlighter("TSTitle", bold_italic, none, fg_1, none)
@@ -711,16 +687,16 @@ highlight_linker("diffSubname", "Title")
     highlight_linker("TSVariable", "Identifier")
     highlight_linker("TSVariableBuiltin", "IdentifierBuiltin")
     highlight_linker("TSWarning", "DiagnosticWarn")
-    highlighter("TSEmphasis", italic, nil, nil, nil)
-    highlighter("TSStrong", bold, nil, nil, nil)
-    highlighter("TSUnderline", underline, nil, nil, nil)
+    -- highlighter("TSEmphasis", italic, nil, nil, nil)
+    -- highlighter("TSStrong", bold, nil, nil, nil)
+    -- highlighter("TSUnderline", underline, nil, nil, nil)
     -- TODO: It seems currently we don't have strikethrough for nvim_set_hl.
     -- Add strikethrough when for CocStrikeThrough when it's available.
     -- highlight( TSStrike term=strikethrough cterm=strikethrough gui=strikethrough
   end
 -- }}}
 -- nvim-tree.lua: {{{
-  if plugin_is_activated('tree') then
+  if plugin_is_activated("tree") then
     highlighter("NvimTreeNormal", none, bg_0, dim_0, none)
     highlighter("NvimTreeNormalNC", none, bg_0, dim_0, none)
     highlight_linker("NvimTreeCursorColumn", "Line")
@@ -763,7 +739,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- packer.nvim: {{{
-  if plugin_is_activated('packer') then
+  if plugin_is_activated("packer") then
     highlight_linker("packerWorking", "Accent")
     highlight_linker("packerSuccess", "Success")
     highlight_linker("packerFail", "DiagnosticError")
@@ -787,7 +763,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- rainbow: {{{
-  if plugin_is_activated('rainbow') then
+  if plugin_is_activated("rainbow") then
     if enfocado_style == "neon" then
       local rainbow_guifgs   = { violet[1], cyan[1], magenta[1], br_violet[1] }
       local rainbow_ctermfgs = { violet[2], cyan[2], magenta[2], br_violet[2] }
@@ -801,16 +777,16 @@ highlight_linker("diffSubname", "Title")
     end
 
     if vim.g.rainbow_conf["guifgs"] then
-      vim.g.rainbow_conf['guifgs'] = vim.g.rainbow_guifgs
+      vim.g.rainbow_conf["guifgs"] = vim.g.rainbow_guifgs
     end
 
     if vim.g.rainbow_conf["ctermfgs"] then
-      vim.g.rainbow_conf['ctermfgs'] = vim.g.rainbow_ctermfgs
+      vim.g.rainbow_conf["ctermfgs"] = vim.g.rainbow_ctermfgs
     end
   end
 --}}}
 -- telescope.nvim: {{{
-  if plugin_is_activated('telescope') then
+  if plugin_is_activated("telescope") then
     highlighter("TelescopePreviewDate", none, none, blue, none)
     highlighter("TelescopePreviewDirectory", bold, none, br_blue, none)
     highlighter("TelescopePreviewExecute", none, none, green, none)
@@ -860,7 +836,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- todo-comments.nvim: {{{
-  if plugin_is_activated('todo-comments') then
+  if plugin_is_activated("todo-comments") then
     highlighter("TodoBgFIX", bold, br_red, bg_1, none)
     highlighter("TodoBgHACK", bold, br_yellow, bg_1, none)
     highlighter("TodoBgNOTE", bold, br_green, bg_1, none)
@@ -882,14 +858,14 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- vim-floaterm: {{{
-  if plugin_is_activated('floaterm') then
+  if plugin_is_activated("floaterm") then
     highlight_linker("Floaterm", "NormalFloat")
     highlight_linker("FloatermBorder", "FloatBorder")
     highlight_linker("FloatermNC", "NormalFloat")
   end
 -- }}}
 -- vim-matchup: {{{
-  if plugin_is_activated('matchup') then
+  if plugin_is_activated("matchup") then
     highlight_linker("MatchBackground", "Visual")
     highlight_linker("MatchParenCur", "Visual")
     highlight_linker("MatchWord", "Visual")
@@ -897,7 +873,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- vim-plug: {{{
-  if plugin_is_activated('plug') then
+  if plugin_is_activated("plug") then
     highlight_linker("plug1", "Title")
     highlight_linker("plug2", "Accent")
     highlight_linker("plugBracket", "Text")
@@ -922,7 +898,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- vim-signify: {{{
-  if plugin_is_activated('signify') then
+  if plugin_is_activated("signify") then
     if vim.g.signify_line_highlight == 1 then
       highlight_linker("SignifyLineAdd", "DiffAdd")
       highlight_linker("SignifyLineChange", "DiffChange")
@@ -938,7 +914,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- which-key.nvim: {{{
-  if plugin_is_activated('which-key') then
+  if plugin_is_activated("which-key") then
     highlight_linker("WhichKey", "Text")
     highlight_linker("WhichKeyDesc", "Text")
     highlight_linker("WhichKeyFloat", "NormalFloat")
@@ -948,7 +924,7 @@ highlight_linker("diffSubname", "Title")
   end
 -- }}}
 -- vista.vim: {{{
-  if plugin_is_activated('vista') then
+  if plugin_is_activated("vista") then
     highlight_linker("VistaBracket", "Ignore")
     highlight_linker("VistaChildrenNr", "Ignore")
     highlight_linker("VistaColon", "Ignore")
