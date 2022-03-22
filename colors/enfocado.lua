@@ -78,14 +78,18 @@ local enfocado_plugins = vim.g.enfocado_plugins
 
 -- A function is created to check on-demand plugins.
 local function plugin_is_activated(name)
-  if enfocado_plugins == "none" then
-    return 0
-  elseif enfocado_plugins == "all" then
+  if type(enfocado_plugins) == "nil" then
     return 1
   else
-    for _, v in pairs(enfocado_plugins) do
-      if v == name then
-        return 1
+    if enfocado_plugins == "none" then
+      return 0
+    elseif enfocado_plugins == "all" then
+      return 1
+    else
+      for _, v in pairs(enfocado_plugins) do
+        if v == name then
+          return 1
+        end
       end
     end
   end
@@ -95,17 +99,17 @@ end
 local function highlighter(group, set_attr, bg_color, fg_color, set_sp)
   local fg_color = fg_color
   if type(fg_color) == "nil" then
-    fg_color = { "nil", "nil" }
+    fg_color = { nil, nil }
   end
 
   local bg_color = bg_color
   if type(bg_color) == "nil" then
-    bg_color = { "nil", "nil" }
+    bg_color = { nil, nil }
   end
 
   local set_sp = set_sp
   if type(set_sp) == "nil" then
-    set_sp = { "nil", "nil" }
+    set_sp = { nil, nil }
   end
 
   local set_attr = set_attr
