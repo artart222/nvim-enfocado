@@ -65,12 +65,12 @@ vim.g.terminal_color_14 = "#56D8C9"
 vim.g.terminal_color_15 = "#DEDEDE"
 
 -- Attributes are declared.
-local none = { "NONE", "NONE" }
-local bold = { { bold = true }, { bold = true } }
-local bold_italic = { { bold = true, italic = true }, { bold = true, italic = true } }
-local italic = { { italic = true }, { italic = true } }
-local underline = { { underline = true }, { underline = true } }
-local undercurl = { { undercurl = true }, { underline = true } }
+local none = {}
+local bold = { bold = true, italic = false, underline = false, undercurl = false }
+local bold_italic = { bold = true, italic = true, undercurl = false, underline = false }
+local italic = { italic = true, bold = false, underline = false, undercurl = false }
+local underline = { underline = true, undercurl = false, bold = false, italic = false }
+local undercurl = { undercurl = true, underline = false, bold = false, italic = false }
 
 -- Enfocado configuration variables are initialized.
 local enfocado_style = vim.g.enfocado_style
@@ -97,24 +97,20 @@ end
 
 -- A function is created to make using nvim_set_hl easier.
 local function highlighter(group, set_attr, bg_color, fg_color, set_sp)
-  local fg_color = fg_color
   if type(fg_color) == "nil" then
     fg_color = { nil, nil }
   end
 
-  local bg_color = bg_color
   if type(bg_color) == "nil" then
     bg_color = { nil, nil }
   end
 
-  local set_sp = set_sp
   if type(set_sp) == "nil" then
     set_sp = { nil, nil }
   end
 
-  local set_attr = set_attr
-  if set_attr[1] == "NONE" then
-    set_attr = { { nil }, { nil } }
+  if not next(set_attr) then
+    set_attr = { italic = false, bold = false, underline = false, undercurl = false }
   end
 
   vim.api.nvim_set_hl(0, group, {
@@ -122,10 +118,16 @@ local function highlighter(group, set_attr, bg_color, fg_color, set_sp)
     fg = fg_color[1],
     ctermbg = bg_color[2],
     ctermfg = fg_color[2],
-    unpack(set_attr[1]),
+    italic = set_attr.italic,
+    bold = set_attr.bold,
+    undercurl = set_attr.undercurl,
+    underline = set_attr.underline,
     sp = set_sp[1],
     cterm = {
-      unpack(set_attr[2]),
+      italic = set_attr.italic,
+      bold = set_attr.bold,
+      undercurl = set_attr.undercurl,
+      underline = set_attr.underline,
     },
   })
 end
