@@ -468,6 +468,13 @@ if plugin_is_activated("dashboard") == 1 then
   highlight_linker("DashboardShortCut", "Dimmed")
   highlight_linker("DashboardFooter", "Ignore")
 end
+-- dashboard-nvim: {{{
+if plugin_is_activated("alpha") == 1 then
+  highlight_linker("AlphaHeader", "Accent")
+  highlight_linker("AlphaCenter", "Dimmed")
+  highlight_linker("AlphaShortcut", "Dimmed")
+  highlight_linker("AlphaFooter", "Ignore")
+end
 -- }}}
 -- fzf.vim: {{{
 if plugin_is_activated("fzf") then
