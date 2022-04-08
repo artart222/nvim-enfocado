@@ -53,22 +53,10 @@ use { "artart222/nvim-enfocado' }
 
 ### Statuslines
 
-To use [Lightline](https://github.com/itchyny/lightline.vim) theme:
-
-```lua
-vim.g.lightline = { ["colorscheme"] = "enfocado" }
-```
-
 To use [Lualine](https://github.com/hoob3rt/lualine.nvim) theme:
 
 ```lua
 require("lualine").setup { options = { theme = "enfocado" } }
-```
-
-To use [Airline](https://github.com/vim-airline/vim-airline) theme:
-
-```lua
-vim.g.airline_theme = "enfocado"
 ```
 
 ### Colorscheme
@@ -89,26 +77,25 @@ If you want to reduce the loading time of **Enfocado**, you can specify the plug
 
 ```lua
 -- NOTE: To see a list of all available plugins, run
--- `:h enfocado-colorscheme` at the vim commandline.
+-- `:h enfocado-colorscheme` at the nvim commandline.
 vim.g.enfocado_plugins = {
   "coc",
   "copilot",
+  "alpha",
   "fzf",
-  "gitgutter",
-  "matchup",
   "nerdtree",
-  "plug",
-  "rainbow",
-  "yank",
+  "cmp",
+  "lsp"
+  "lsp-installer",
+  "notify",
+  "scrollview",
 }
 ```
 
 And finally turn on the **Enfocado** theme and enjoy!
 
 ```lua
--- IMPORTANT: this vim auto command ensures the
--- activation of Enfocado in compatible plugins.
-vim.cmd("autocmd VimEnter * ++nested colorscheme enfocado")
+vim.cmd("colorscheme enfocado")
 ```
 
 ### Customization
@@ -161,7 +148,6 @@ This NeoVim configs comes with **Enfocado for NeoVim** already installed by defa
 - [Selenized black for terminals](https://github.com/jan-warchol/selenized/tree/master/terminals).
 - [Enfocado for VS Code](https://github.com/wuelnerdotexe/vscode-enfocado).
 
-
 ## Contributing
 
 All your ideas and suggestions are welcome! 🙌
@@ -203,7 +189,7 @@ The following plugins are supported:
 - Theme colorscheme by [Jan Warchol](https://github.com/jan-warchol) on [Github](https://github.com/jan-warchol/selenized/blob/master/the-values.md).
 - Enfocado Nature wallpaper by [Josefin](https://unsplash.com/@josefin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/nature?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
 - Enfocado Neon wallpaper by [Dilyara Garifullina](https://unsplash.com/@dilja96?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/neon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
-- Original enfocado by [wuelnerdotexe](https://github.com/wuelnerdotexe)
+- Original enfocado by [wuelnerdotexe](https://github.com/wuelnerdotexe) on [Github](https://github.com/wuelnerdotexe/vim-enfocado)
 
 ## License
 

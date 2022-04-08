@@ -25,29 +25,30 @@ plugins you want to apply the theme to on-demand, This is the full list of
 supported plugins so far:
 
 `vim.g.enfocado_plugins = {`
-`  "cmp",`
 `  "coc",`
 `  "copilot",`
 `  "dashboard",`
-`  "floaterm",`
+`  "alpha",`
 `  "fzf",`
-`  "lsp",`
-`  "lsp-installer",`
-`  "matchup",`
 `  "nerdtree",`
 `  "netrw",`
+`  "cmp",`
+`  "lsp",`
+`  "lsp-installer",`
 `  "notify",`
-`  "packer",`
-`  "plug",`
-`  "rainbow",`
 `  "scrollview",`
-`  "signify"`
+`  "treesitter",`
+`  "tree",`
+`  "packer",`
+`  "rainbow",`
 `  "telescope",`
 `  "todo-comments",`
-`  "tree",`
-`  "treesitter",`
-`  "vista",`
+`  "floaterm",`
+`  "matchup",`
+`  "plug",`
+`  "signify"`
 `  "which-key",`
+`  "vista",`
 `}`
 
 or also indicate the `all` option to highlight all supported plugins:
@@ -60,9 +61,7 @@ or simply indicate the `none` option to disable plugin support:
 
 And finally turn on the Enfocado theme and enjoy!
 
-`-- IMPORTANT: this NeoVim auto command ensures the`
-`-- activation of Enfocado in compatible plugins.`
-`vim.cmd("autocmd VimEnter * ++nested colorscheme enfocado")`
+`vim.cmd("colorscheme enfocado")`
 
 ==============================================================================
 
