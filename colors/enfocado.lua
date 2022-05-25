@@ -144,7 +144,7 @@ end
 if enfocado_style == "neon" then
   -- Neon interfaz.
   highlighter("Accent", none, none, br_magenta, none)
-  highlighter("FloatBorder", none, bg_1, magenta, none)
+  highlighter("FloatBorder", none, none, magenta, none)
   highlighter("IncSearch", bold, bg_2, br_magenta, none)
   highlighter("Search", bold, bg_2, br_magenta, none)
   highlighter("ToolbarButton", none, magenta, bg_1, none)
@@ -165,7 +165,7 @@ if enfocado_style == "neon" then
 else
   -- Nature interfaz.
   highlighter("Accent", none, none, br_green, none)
-  highlighter("FloatBorder", none, bg_1, green, none)
+  highlighter("FloatBorder", none, none, green, none)
   highlighter("IncSearch", bold, bg_2, br_green, none)
   highlighter("Search", bold, bg_2, br_green, none)
   highlighter("ToolbarButton", none, green, bg_1, none)
@@ -210,7 +210,7 @@ highlighter("MoreMsg", none, none, br_yellow, none)
 highlighter("None", none, none, none, none)
 highlighter("NonText", none, none, bg_2, none)
 highlighter("Normal", none, bg_0, fg_0, none)
-highlighter("NormalFloat", none, bg_1, fg_0, none)
+highlighter("NormalFloat", none, none, fg_0, none)
 highlighter("NormalNC", none, bg_0, fg_0, none)
 highlighter("NvimInternalError", none, none, br_red, none)
 highlighter("Pmenu", none, bg_1, fg_0, none)
@@ -927,7 +927,7 @@ end
 if plugin_is_activated("which-key") then
   highlight_linker("WhichKey", "Text")
   highlight_linker("WhichKeyDesc", "Text")
-  highlight_linker("WhichKeyFloat", "NormalFloat")
+  highlight_linker("WhichKeyFloat", "ColorColumn")
   highlight_linker("WhichKeyGroup", "Dimmed")
   highlight_linker("WhichKeySeparator", "NonText")
   highlight_linker("WhichKeyValue", "Text")
