@@ -9,17 +9,16 @@
 --              the code and nothing else.
 -------------------------------------------------------------------------------
 
--- " The Enfocado theme is initialized.
-vim.g.colors_name = "enfocado"
-
--- " NeoVim's dark mode is on.
-vim.opt.background = "dark"
-
 -- All highlights are removed.
 if vim.g.colors_name then
   vim.cmd("hi clear")
+end
+if vim.fn.exists("syntax_on") then
   vim.cmd("syntax reset")
 end
+
+-- " The Enfocado theme is initialized.
+vim.g.colors_name = "enfocado"
 
 -- Selenized black color scheme variables are declared.
 local bg_0 = { "#181818", 234 }
@@ -47,22 +46,42 @@ local br_violet = { "#B891F5", 141 }
 local black = { "#000000", 16 }
 
 -- NeoVim terminal variables are assigned.
-vim.g.terminal_color_0 = "#252525"
-vim.g.terminal_color_1 = "#ED4A46"
-vim.g.terminal_color_2 = "#70B433"
-vim.g.terminal_color_3 = "#DBB32D"
-vim.g.terminal_color_4 = "#368AEB"
-vim.g.terminal_color_5 = "#EB6EB7"
-vim.g.terminal_color_6 = "#3FC5B7"
-vim.g.terminal_color_7 = "#777777"
-vim.g.terminal_color_8 = "#3B3B3B"
-vim.g.terminal_color_9 = "#FF5E56"
-vim.g.terminal_color_10 = "#83C746"
-vim.g.terminal_color_11 = "#EFC541"
-vim.g.terminal_color_12 = "#4F9CFE"
-vim.g.terminal_color_13 = "#FF81CA"
-vim.g.terminal_color_14 = "#56D8C9"
-vim.g.terminal_color_15 = "#DEDEDE"
+vim.g.terminal_ansi_colors = {
+  bg_1[1],
+  red[1],
+  green[1],
+  yellow[1],
+  blue[1],
+  magenta[1],
+  cyan[1],
+  dim_0[1],
+  bg_2[1],
+  br_red[1],
+  br_green[1],
+  br_yellow[1],
+  br_blue[1],
+  br_magenta[1],
+  br_cyan[1],
+  fg_1[1],
+}
+
+-- NeoVim terminal variables are assigned.
+vim.g.terminal_color_0 = bg_1[1]
+vim.g.terminal_color_1 = red[1]
+vim.g.terminal_color_2 = green[1]
+vim.g.terminal_color_3 = yellow[1]
+vim.g.terminal_color_4 = blue[1]
+vim.g.terminal_color_5 = magenta[1]
+vim.g.terminal_color_6 = cyan[1]
+vim.g.terminal_color_7 = dim_0[1]
+vim.g.terminal_color_8 = bg_2[1]
+vim.g.terminal_color_9 = br_red[1]
+vim.g.terminal_color_10 = br_green[1]
+vim.g.terminal_color_11 = br_yellow[1]
+vim.g.terminal_color_12 = br_blue[1]
+vim.g.terminal_color_13 = br_magenta[1]
+vim.g.terminal_color_14 = br_cyan[1]
+vim.g.terminal_color_15 = fg_1[1]
 
 -- Attributes are declared.
 local none = {}
