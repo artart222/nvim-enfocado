@@ -704,6 +704,25 @@ if plugin_is_activated("treesitter") then
   -- Add strikethrough when for CocStrikeThrough when it's available.
   -- highlight( TSStrike term=strikethrough cterm=strikethrough gui=strikethrough
 end
+
+if vim.g.enfocado_style == "neon" then
+  highlighter("rainbowcol1", none, none, violet, none)
+  highlighter("rainbowcol2", none, none, cyan, none)
+  highlighter("rainbowcol3", none, none, magenta, none)
+  highlighter("rainbowcol4", none, none, br_violet, none)
+  highlighter("rainbowcol5", none, none, br_cyan, none)
+  highlighter("rainbowcol6", none, none, br_magenta, none)
+  highlighter("rainbowcol7", none, none, violet, none)
+else
+  highlighter("rainbowcol1", none, none, blue, none)
+  highlighter("rainbowcol2", none, none, cyan, none)
+  highlighter("rainbowcol3", none, none, green, none)
+  highlighter("rainbowcol4", none, none, br_blue, none)
+  highlighter("rainbowcol5", none, none, br_cyan, none)
+  highlighter("rainbowcol6", none, none, br_green, none)
+  highlighter("rainbowcol7", none, none, blue, none)
+end
+
 -- }}}
 -- nvim-tree.lua: {{{
 if plugin_is_activated("tree") then
