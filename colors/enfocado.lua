@@ -21,30 +21,55 @@ end
 vim.g.colors_name = "enfocado"
 
 -- Selenized black color scheme variables are declared.
-local bg_0 = { "#181818", 234 }
-local bg_1 = { "#252525", 235 }
-local bg_2 = { "#3B3B3B", 237 }
-local dim_0 = { "#777777", 243 }
-local fg_0 = { "#B9B9B9", 250 }
-local fg_1 = { "#DEDEDE", 253 }
-local red = { "#ED4A46", 203 }
-local green = { "#70B433", 107 }
-local yellow = { "#DBB32D", 179 }
-local blue = { "#368AEB", 69 }
-local magenta = { "#EB6EB7", 205 }
-local cyan = { "#3FC5B7", 79 }
-local orange = { "#E67F43", 173 }
-local violet = { "#A580E2", 140 }
-local br_red = { "#FF5E56", 203 }
-local br_green = { "#83C746", 113 }
-local br_yellow = { "#EFC541", 221 }
-local br_blue = { "#4F9CFE", 75 }
-local br_magenta = { "#FF81CA", 212 }
-local br_cyan = { "#56D8C9", 80 }
-local br_orange = { "#FA9153", 209 }
-local br_violet = { "#B891F5", 141 }
-local black = { "#000000", 16 }
-
+if vim.go.background == "dark" then
+  bg_0 = { "#181818", 234 }
+  bg_1 = { "#252525", 235 }
+  bg_2 = { "#3B3B3B", 237 }
+  dim_0 = { "#777777", 243 }
+  fg_0 = { "#B9B9B9", 250 }
+  fg_1 = { "#DEDEDE", 253 }
+  red = { "#ED4A46", 203 }
+  green = { "#70B433", 107 }
+  yellow = { "#DBB32D", 179 }
+  blue = { "#368AEB", 69 }
+  magenta = { "#EB6EB7", 205 }
+  cyan = { "#3FC5B7", 79 }
+  orange = { "#E67F43", 173 }
+  violet = { "#A580E2", 140 }
+  br_red = { "#FF5E56", 203 }
+  br_green = { "#83C746", 113 }
+  br_yellow = { "#EFC541", 221 }
+  br_blue = { "#4F9CFE", 75 }
+  br_magenta = { "#FF81CA", 212 }
+  br_cyan = { "#56D8C9", 80 }
+  br_orange = { "#FA9153", 209 }
+  br_violet = { "#B891F5", 141 }
+  black = { "#000000", 16 }
+else
+  bg_0 = { "#ffffff", 231 }
+  bg_1 = { "#ebebeb", 255 }
+  bg_2 = { "#cdcdcd", 252 }
+  dim_0 = { "#878787", 245 }
+  fg_0 = { "#474747", 238 }
+  fg_1 = { "#282828", 235 }
+  red = { "#d6000c", 160 }
+  green = { "#1d9700", 28 }
+  yellow = { "#c49700", 172 }
+  blue = { "#0064e4", 26 }
+  magenta = { "#dd0f9d", 91 }
+  cyan = { "#00ad9c", 37 }
+  orange = { "#d04a00", 166 }
+  violet = { "#7f51d6", 98 }
+  br_red = { "#bf0000", 124 }
+  br_green = { "#008400", 28 }
+  br_yellow = { "#af8500", 136 }
+  br_blue = { "#0054cf", 26 }
+  br_magenta = { "#c7008b", 162 }
+  br_cyan = { "#009a8a", 30 }
+  br_orange = { "#ba3700", 130 }
+  br_violet = { "#B891F5", 61 }
+  black = { "#000000", 16 }
+end
 -- NeoVim terminal variables are assigned.
 vim.g.terminal_ansi_colors = {
   bg_1[1],
