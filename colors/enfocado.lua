@@ -350,7 +350,7 @@ highlight_linker("WinSeparator", "VertSplit")
 
 -- General syntax:
 highlighter("Comment", italic, none, dim_0, none)
-highlighter("ConstIdentifier", none, none, red, none)
+highlighter("ConstIdentifier", none, none, yellow, none)
 highlighter("Error", none, none, br_red, none)
 highlighter("Trace", nocombine, none, br_magenta, none)
 highlighter("Exception", nocombine, none, orange, none)
@@ -951,4 +951,325 @@ if plugin_is_activated("notify") then
   highlight_linker("NotifyINFOBody", "NormalFloat")
   highlight_linker("NotifyTRACEBody", "NormalFloat")
   highlight_linker("NotifyWARNBody", "NormalFloat")
+end
+
+-- nvim-scrollview:
+if plugin_is_activated("scrollview") then
+  highlight_linker("ScrollView", "Line")
+end
+
+-- nvim-surround:
+if plugin_is_activated("surround") then
+  highlight_link("NvimSurroundHighlight", "Search")
+end
+
+-- nvim-treesitter:
+if plugin_is_activated("treesitter") then
+  highlighter("@text.danger", bold, br_red, bg_1, none)
+  highlighter("@text.note", bold, br_yellow, bg_1, none)
+  highlighter("@text.warning", bold, br_orange, bg_1, none)
+  highlighter("@text.literal", italic, none, fg_0, none)
+  highlighter("@none", none, none, none, none)
+  highlighter("@text.title", nocombine, none, fg_1, none)
+  highlight_linker("@annotation", "SpecialComment")
+  highlight_linker("@attribute", "SpecialComment")
+  highlight_linker("@boolean", "Boolean")
+  highlight_linker("@character", "Character")
+  highlight_linker("@character.special", "SpecialChar")
+  highlight_linker("@comment", "Comment")
+  highlight_linker("@conditional", "Conditional")
+  highlight_linker("@constant.builtin", "ConstIdentifier")
+  highlight_linker("@constant", "ConstIdentifier")
+  highlight_linker("@constant.macro", "ConstIdentifier")
+  highlight_linker("@constructor", "Type")
+  highlight_linker("@debug", "Debug")
+  highlight_linker("@define", "PreProc")
+  highlight_linker("@error", "Error")
+  highlight_linker("@exception", "Exception")
+  highlight_linker("@field", "Property")
+  highlight_linker("@float", "Float")
+  highlight_linker("@function", "Function")
+  highlight_linker("@function.builtin", "FunctionBuiltin")
+  highlight_linker("@function.call", "Function")
+  highlight_linker("@function.macro", "Function")
+  highlight_linker("@include", "Include")
+  highlight_linker("@keyword", "Keyword")
+  highlight_linker("@keyword.function", "Type")
+  highlight_linker("@keyword.operator", "Operator")
+  highlight_linker("@keyword.return", "Keyword")
+  highlight_linker("@label", "Label")
+  highlight_linker("@method", "Method")
+  highlight_linker("@method.call", "Method")
+  highlight_linker("@namespace", "Text")
+  highlight_linker("@number", "Number")
+  highlight_linker("@operator", "Operator")
+  highlight_linker("@parameter", "Identifier")
+  highlight_linker("@parameter.reference", "Indentifier")
+  highlight_linker("@preproc", "PreProc")
+  highlight_linker("@property", "Property")
+  highlight_linker("@punctuation.bracket", "Delimiter")
+  highlight_linker("@punctuation.delimiter", "Delimiter")
+  highlight_linker("@punctuation.special", "StatementBuiltin")
+  highlight_linker("@repeat", "Repeat")
+  highlight_linker("@storageclass", "StorageClass")
+  highlight_linker("@string", "String")
+  highlight_linker("@string.escape", "StatementBuiltin")
+  highlight_linker("@string.regex", "StatementBuiltin")
+  highlight_linker("@string.special", "StatementBuiltin")
+  highlight_linker("@symbol", "Identifier")
+  highlight_linker("@tag", "Tag")
+  highlight_linker("@tag.attribute", "Identifier")
+  highlight_linker("@tag.delimiter", "Delimiter")
+  highlight_linker("@text", "Text")
+  highlight_linker("@text.environmen.name", "StatementBuiltin")
+  highlight_linker("@text.environment", "Text")
+  highlight_linker("@text.math", "StatementBuiltin")
+  highlight_linker("@text.reference", "TSLiteral")
+  highlight_linker("@text.uri", "Link")
+  highlight_linker("@todo", "Todo")
+  highlight_linker("@type", "Type")
+  highlight_linker("@type.builtin", "TypeBuiltin")
+  highlight_linker("@type.definition", "PreProc")
+  highlight_linker("@type.qualifier", "Type")
+  highlight_linker("@variable", "Identifier")
+  highlight_linker("@variable.builtin", "IdentifierBuiltin")
+  -- TODO: Complete this
+  -- highlight! @text.emphasis term=italic cterm=italic gui=italic
+  -- highlight! @text.strike term=strikethrough cterm=strikethrough gui=strikethrough
+  -- highlight! @text.strong term=bold cterm=bold gui=bold
+  -- highlight! @text.underline term=underline cterm=underline gui=underline
+
+  -- TSModule info:
+  highlight_linker("TSModuleInfoGood", "Success")
+  highlight_linker("TSModuleInfoBad", "DiagnosticError")
+  highlight_linker("TSModuleInfoHeader", "Accent")
+  highlight_linker("TSModuleInfoNamespace", "Title")
+  highlight_linker("TSModuleInfoParser", "Text")
+end
+
+-- nvim-tree.lua:
+if plugin_is_activated("tree") then
+  highlighter("NvimTreeImageFile", bold, none, br_magenta, none)
+  highlighter("NvimTreeSpecialFile", bold_underline, none, br_yellow, yellow)
+  highlight_linker("NvimTreeCursorColumn", "Line")
+  highlight_linker("NvimTreeCursorLine", "Line")
+  highlight_linker("NvimTreeEmptyFolderName", "Directory")
+  highlight_linker("NvimTreeEndOfBuffer", "EndOfBuffer")
+  highlight_linker("NvimTreeExecFile", "FileExec")
+  highlight_linker("NvimTreeFileDeleted", "DiffDelete")
+  highlight_linker("NvimTreeFileDirty", "DiffChange")
+  highlight_linker("NvimTreeFileMerge", "DiffChange")
+  highlight_linker("NvimTreeFileNew", "DiffAdd")
+  highlight_linker("NvimTreeFileRenamed", "DiffAdd")
+  highlight_linker("NvimTreeFileStaged", "DiffChange")
+  highlight_linker("NvimTreeFolderIcon", "Directory")
+  highlight_linker("NvimTreeFolderName", "Directory")
+  highlight_linker("NvimTreeGitDeleted", "DiffDelete")
+  highlight_linker("NvimTreeGitDirty", "DiffChange")
+  highlight_linker("NvimTreeGitIgnored", "Text")
+  highlight_linker("NvimTreeGitMerge", "DiffChange")
+  highlight_linker("NvimTreeGitNew", "DiffAdd")
+  highlight_linker("NvimTreeGitRenamed", "DiffAdd")
+  highlight_linker("NvimTreeGitStaged", "DiffChange")
+  highlight_linker("NvimTreeIndentMarker", "NonText")
+  highlight_linker("NvimTreeLspDiagnosticsError", "DiagnosticError")
+  highlight_linker("NvimTreeLspDiagnosticsHint", "DiagnosticHint")
+  highlight_linker("NvimTreeLspDiagnosticsInformation", "DiagnosticInfo")
+  highlight_linker("NvimTreeLspDiagnosticsWarning", "DiagnosticWarn")
+  highlight_linker("NvimTreeNormal", "Normal")
+  highlight_linker("NvimTreeNormalNC", "NormalNC")
+  highlight_linker("NvimTreeOpenedFile", "Accent")
+  highlight_linker("NvimTreeOpenedFolderName", "Directory")
+  highlight_linker("NvimTreePopup", "NormalFloat")
+  highlight_linker("NvimTreeRootFolder", "Directory")
+  highlight_linker("NvimTreeSignColumn", "SignColumn")
+  highlight_linker("NvimTreeStatusLine", "StatusLine")
+  highlight_linker("NvimTreeStatusLineNC", "StatusLineNC")
+  highlight_linker("NvimTreeSymlink", "FileLink")
+  highlight_linker("NvimTreeVertSplit", "VertSplit")
+  highlight_linker("NvimTreeWindowPicker", "Accent")
+end
+
+-- nvim-ts-rainbow:
+if plugin_is_activated("ts-rainbow") then
+  highlighter("rainbowcol1", none, none, accent_1, none)
+  highlighter("rainbowcol2", none, none, cyan, none)
+  highlighter("rainbowcol3", none, none, accent_0, none)
+  highlighter("rainbowcol4", none, none, br_accent_1, none)
+  highlighter("rainbowcol5", none, none, br_cyan, none)
+  highlighter("rainbowcol6", none, none, br_accent_0, none)
+  highlighter("rainbowcol7", none, none, accent_1, none)
+end
+
+-- nvim-ts-rainbow2:
+if plugin_is_activated("ts-rainbow2") then
+  highlighter("TSRainbowRed", none, none, br_red, none)
+  highlighter("TSRainbowYellow", none, none, br_yellow, none)
+  highlighter("TSRainbowBlue", none, none, br_blue, none)
+  highlighter("TSRainbowOrange", none, none, br_orange, none)
+  highlighter("TSRainbowGreen", none, none, br_green, none)
+  highlighter("TSRainbowViolet", none, none, br_violet, none)
+  highlighter("TSRainbowCyan", none, none, br_cyan, none)
+end
+
+-- packer.nvim:
+if plugin_is_activated("packer") then
+  highlight_linker("packerWorking", "Accent")
+  highlight_linker("packerSuccess", "Success")
+  highlight_linker("packerFail", "DiagnosticError")
+  highlight_linker("packerStatus", "DiagnosticInfo")
+  highlight_linker("packerStatusSuccess", "Success")
+  highlight_linker("packerStatusFail", "DiagnosticError")
+  highlight_linker("packerStatusCommit", "Dimmed")
+  highlight_linker("packerHash", "Dimmed")
+  highlight_linker("packerRelDate", "Dimmed")
+  highlight_linker("packerProgress", "DiagnosticInfo")
+  highlight_linker("packerOutput", "Text")
+  highlight_linker("packerTimeHigh", "Dimmed")
+  highlight_linker("packerTimeMedium", "Dimmed")
+  highlight_linker("packerTimeLow", "Dimmed")
+  highlight_linker("packerTimeTrivial", "Dimmed")
+  highlight_linker("packerPackageNotLoaded", "Dimmed")
+  highlight_linker("packerPackageName", "Text")
+  highlight_linker("packerString", "String")
+  highlight_linker("packerBool", "Boolean")
+  highlight_linker("packerBreakingChange", "DiagnosticWarn")
+end
+
+-- SmoothCursor.nvim:
+if plugin_is_activated("smoothcursor") then
+  highlighter("SmoothCursor", nocombine, none, br_accent_0, none)
+  highlighter("SmoothCursorRed", nocombine, none, br_red, none)
+  highlighter("SmoothCursorGreen", nocombine, none, br_green, none)
+  highlighter("SmoothCursorYellow", nocombine, none, br_yellow, none)
+  highlighter("SmoothCursorBlue", nocombine, none, br_blue, none)
+  highlighter("SmoothCursorPurple", nocombine, none, br_magenta, none)
+  highlighter("SmoothCursorAqua", nocombine, none, br_cyan, none)
+  highlighter("SmoothCursorOrange", nocombine, none, br_orange, none)
+end
+
+-- substitute.nvim:
+if plugin_is_activated("substitute") then
+  highlight_linker("SubstituteRange", "Search")
+  highlight_linker("SubstituteExchange", "Search")
+end
+
+-- telescope.nvim:
+if plugin_is_activated("telescope") then
+  highlighter("TelescopePreviewDate", nocombine, none, blue, none)
+  highlighter("TelescopePreviewRead", bold, none, br_yellow, none)
+  highlighter("TelescopePreviewSize", nocombine, none, br_green, none)
+  highlighter("TelescopePreviewUser", bold, none, br_yellow, none)
+  highlighter("TelescopePreviewWrite", bold, none, br_red, none)
+  highlight_linker("TelescopeBorder", "FloatBorder")
+  highlight_linker("TelescopeMatching", "Match")
+  highlight_linker("TelescopeMultiSelection", "Visual")
+  highlight_linker("TelescopeNormal", "NormalFloat")
+  highlight_linker("TelescopePreviewBorder", "FloatBorder")
+  highlight_linker("TelescopePreviewDirectory", "Directory")
+  highlight_linker("TelescopePreviewExecute", "FileExec")
+  highlight_linker("TelescopePreviewLink", "FileLink")
+  highlight_linker("TelescopePreviewMatch", "Search")
+  highlight_linker("TelescopePreviewMessage", "DiagnosticInfo")
+  highlight_linker("TelescopePreviewMessageFillchar", "DiagnosticInfo")
+  highlight_linker("TelescopePreviewNormal", "NormalFloat")
+  highlight_linker("TelescopePreviewTitle", "TelescopeTitle")
+  highlight_linker("TelescopePromptBorder", "FloatBorder")
+  highlight_linker("TelescopePromptCounter", "DiagnosticInfo")
+  highlight_linker("TelescopePromptNormal", "NormalFloat")
+  highlight_linker("TelescopePromptPrefix", "Text")
+  highlight_linker("TelescopePromptTitle", "TelescopeTitle")
+  highlight_linker("TelescopeResultsBorder", "FloatBorder")
+  highlight_linker("TelescopeResultsDiffAdd", "DiffAdd")
+  highlight_linker("TelescopeResultsDiffChange", "DiffChange")
+  highlight_linker("TelescopeResultsDiffDelete", "DiffDelete")
+  highlight_linker("TelescopeResultsDiffUntracked", "Ignore")
+  highlight_linker("TelescopeResultsClass", "Type")
+  highlight_linker("TelescopeResultsComment", "Comment")
+  highlight_linker("TelescopeResultsConstant", "ConstIdentifier")
+  highlight_linker("TelescopeResultsField", "Property")
+  highlight_linker("TelescopeResultsFunction", "Function")
+  highlight_linker("TelescopeResultsIdentifier", "Identifier")
+  highlight_linker("TelescopeResultsLineNr", "Ignore")
+  highlight_linker("TelescopeResultsMethod", "Method")
+  highlight_linker("TelescopeResultsNormal", "NormalFloat")
+  highlight_linker("TelescopeResultsNumber", "Number")
+  highlight_linker("TelescopeResultsOperator", "Operator")
+  highlight_linker("TelescopeResultsSpecialComment", "SpecialComment")
+  highlight_linker("TelescopeResultsStruct", "Type")
+  highlight_linker("TelescopeResultsTitle", "TelescopeTitle")
+  highlight_linker("TelescopeResultsVariable", "Identifier")
+  highlight_linker("TelescopeSelection", "Visual")
+  highlight_linker("TelescopeSelectionCaret", "Visual")
+  highlight_linker("TelescopeTitle", "TelescopeNormal")
+end
+
+-- todo-comments.nvim:
+if plugin_is_activated("todo-comments") then
+  highlighter("TodoBgFIX", bold, br_red, bg_1, none)
+  highlighter("TodoBgHACK", bold, br_yellow, bg_1, none)
+  highlighter("TodoBgNOTE", bold, br_green, bg_1, none)
+  highlighter("TodoBgPERF", bold, br_magenta, bg_1, none)
+  highlighter("TodoBgTEST", bold, br_orange, bg_1, none)
+  highlighter("TodoBgTODO", bold, br_cyan, bg_1, none)
+  highlighter("TodoBgWARN", bold, br_orange, bg_1, none)
+  highlighter("TodoFgFIX", nocombine, none, br_red, none)
+  highlighter("TodoFgHACK", nocombine, none, br_yellow, none)
+  highlighter("TodoFgNOTE", nocombine, none, br_green, none)
+  highlighter("TodoFgPERF", nocombine, none, br_magenta, none)
+  highlighter("TodoFgTEST", nocombine, none, br_orange, none)
+  highlighter("TodoFgTODO", nocombine, none, br_cyan, none)
+  highlighter("TodoFgWARN", nocombine, none, br_orange, none)
+  highlighter("TodoSignFIX", nocombine, none, br_red, none)
+  highlighter("TodoSignHACK", nocombine, none, br_yellow, none)
+  highlighter("TodoSignNOTE", nocombine, none, br_green, none)
+  highlighter("TodoSignPERF", nocombine, none, br_magenta, none)
+  highlighter("TodoSignTEST", nocombine, none, br_orange, none)
+  highlighter("TodoSignTODO", nocombine, none, br_cyan, none)
+  highlighter("TodoSignWARN", nocombine, none, br_orange, none)
+end
+
+-- vim-illuminate:
+if plugin_is_activated("illuminate") then
+  highlight_linker("IlluminatedWord", "Visual")
+  highlight_linker("IlluminatedWordText", "IlluminatedWord")
+  highlight_linker("IlluminatedWordRead", "IlluminatedWord")
+  highlight_linker("IlluminatedWordWrite", "IlluminatedWord")
+end
+
+-- vim-matchup:
+if plugin_is_activated("matchup") then
+  highlight_linker("MatchBackground", "Visual")
+  highlight_linker("MatchParenCur", "Visual")
+  highlight_linker("MatchWord", "Visual")
+  highlight_linker("MatchWordCur", "Visual")
+end
+
+-- vista.vim:
+if plugin_is_activated("vista") then
+  highlight_linker("VistaBracket", "Ignore")
+  highlight_linker("VistaChildrenNr", "Ignore")
+  highlight_linker("VistaColon", "Ignore")
+  highlight_linker("VistaFloat", "NormalFloat")
+  highlight_linker("VistaIcon", "Ignore")
+  highlight_linker("VistaLineNr", "Ignore")
+  highlight_linker("VistaPrefix", "Ignore")
+  highlight_linker("VistaScope", "Dimmed")
+  highlight_linker("VistaTag", "Dimmed")
+end
+
+-- which-key.nvim:
+if plugin_is_activated("which-key") then
+  highlight_linker("WhichKey", "MoreMsg")
+  highlight_linker("WhichKeyDesc", "Accent")
+  highlight_linker("WhichKeyFloat", "NormalFloat")
+  highlight_linker("WhichKeyGroup", "Dimmed")
+  highlight_linker("WhichKeySeparator", "NonText")
+  highlight_linker("WhichKeyValue", "Text")
+end
+
+-- yanky.nvim:
+if plugin_is_activated("yanky") then
+  highlighter("YankyPut", reverse, none, none, none)
+  highlighter("YankyYanked", reverse, none, none, none)
 end
