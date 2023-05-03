@@ -469,3 +469,486 @@ highlight_linker("diffSubname", "Title")
 --------------------------------------------------------------------------------
 -- SECTION: Plugins for Neo(Vim) groups highlighting:
 --------------------------------------------------------------------------------
+
+if plugin_is_activated("aerial") then
+  -- Cursorlines:
+  highlight_linker("AerialLine", "Search")
+  highlight_linker("AerialLineNC", "Search")
+
+  -- Symbols:
+  highlight_linker("AerialArrayIcon", "Identifier")
+  highlight_linker("AerialBooleanIcon", "StatementBuiltin")
+  highlight_linker("AerialClassIcon", "Type")
+  highlight_linker("AerialConstantIcon", "ConstIdentifier")
+  highlight_linker("AerialConstructorIcon", "Type")
+  highlight_linker("AerialEnumIcon", "Type")
+  highlight_linker("AerialEnumMemberIcon", "Property")
+  highlight_linker("AerialEventIcon", "Builtin")
+  highlight_linker("AerialFieldIcon", "Property")
+  highlight_linker("AerialFileIcon", "Text")
+  highlight_linker("AerialFunctionIcon", "Accent")
+  highlight_linker("AerialInterfaceIcon", "Type")
+  highlight_linker("AerialKeyIcon", "Identifier")
+  highlight_linker("AerialMethodIcon", "Accent")
+  highlight_linker("AerialModuleIcon", "Text")
+  highlight_linker("AerialNamespaceIcon", "Text")
+  highlight_linker("AerialNullIcon", "StatementBuiltin")
+  highlight_linker("AerialNumberIcon", "Number")
+  highlight_linker("AerialObjectIcon", "Type")
+  highlight_linker("AerialOperatorIcon", "Operator")
+  highlight_linker("AerialPackageIcon", "String")
+  highlight_linker("AerialPropertyIcon", "Property")
+  highlight_linker("AerialStringIcon", "String")
+  highlight_linker("AerialStructIcon", "Type")
+  highlight_linker("AerialTypeParameterIcon", "Type")
+  highlight_linker("AerialVariableIcon", "Identifier")
+
+  -- Indent lines:
+  highlight_linker("AerialGuide", "NonText")
+  highlight_linker("AerialGuide1", "AerialGuide")
+  highlight_linker("AerialGuide2", "AerialGuide")
+  highlight_linker("AerialGuide3", "AerialGuide")
+  highlight_linker("AerialGuide4", "AerialGuide")
+  highlight_linker("AerialGuide5", "AerialGuide")
+  highlight_linker("AerialGuide6", "AerialGuide")
+  highlight_linker("AerialGuide7", "AerialGuide")
+  highlight_linker("AerialGuide8", "AerialGuide")
+  highlight_linker("AerialGuide9", "AerialGuide")
+end
+
+if plugin_is_activated("bufferline") then
+  -- Buffers:
+  highlighter("BufferLineFill", nocombine, base, bg_2, none)
+  highlight_linker("BufferLineBackground", "BufferLineFill")
+  highlight_linker("BufferLineBuffer", "BufferLineBackground")
+  highlight_linker("BufferLineNumbers", "BufferLineBuffer")
+  highlight_linker("BufferLineCloseButton", "BufferLineBuffer")
+  highlight_linker("BufferLineModified", "BufferLineCloseButton")
+  highlight_linker("BufferLineDiagnostic", "BufferLineBuffer")
+
+  -- Selecteds:
+  highlighter("BufferLineBufferSelected", nocombine, none, br_accent_0, none)
+  highlight_linker("BufferLineNumbersSelected", "BufferLineBufferSelected")
+  highlight_linker("BufferLineCloseButtonSelected", "BufferLineBufferSelected")
+  highlight_linker("BufferLineModifiedSelected", "BufferLineCloseButtonSelected")
+  highlight_linker("BufferLineDiagnosticSelected", "BufferLineBufferSelected")
+  highlight_linker("BufferLineIndicatorSelected", "BufferLineBufferSelected")
+
+  -- Visibles:
+  highlighter("BufferLineBufferVisible", nocombine, none, dim_0, none)
+  highlight_linker("BufferLineNumbersVisible", "BufferLineBufferVisible")
+  highlight_linker("BufferLineCloseButtonVisible", "BufferLineBufferVisible")
+  highlight_linker("BufferLineModifiedVisible", "BufferLineCloseButtonVisible")
+  highlight_linker("BufferLineDiagnosticVisible", "BufferLineBufferVisible")
+  highlight_linker("BufferLineIndicatorVisible", "BufferLineBufferVisible")
+
+  -- Errors:
+  highlighter("BufferLineErrorDiagnosticSelected", bold, bg_0, br_red, none)
+  highlight_linker("BufferLineErrorSelected", "BufferLineBufferSelected")
+  highlight_linker("BufferLineErrorDiagnostic", "BufferLineBuffer")
+  highlight_linker("BufferLineError", "BufferLineBuffer")
+  highlight_linker("BufferLineErrorDiagnosticVisible", "BufferLineBufferVisible")
+  highlight_linker("BufferLineErrorVisible", "BufferLineBufferVisible")
+
+  -- Warnings:
+  highlighter("BufferLineWarningDiagnosticSelected", bold, bg_0, br_orange, none)
+  highlight_linker("BufferLineWarningSelected", "BufferLineBufferSelected")
+  highlight_linker("BufferLineWarningDiagnostic", "BufferLineBuffer")
+  highlight_linker("BufferLineWarning", "BufferLineBuffer")
+  highlight_linker("BufferLineWarningDiagnosticVisible", "BufferLineBufferVisible")
+  highlight_linker("BufferLineWarningVisible", "BufferLineBufferVisible")
+
+  -- Infos:
+  highlighter("BufferLineInfoDiagnosticSelected", bold, bg_0, br_yellow, none)
+  highlight_linker("BufferLineInfoSelected", "BufferLineBufferSelected")
+  highlight_linker("BufferLineInfoDiagnostic", "BufferLineBuffer")
+  highlight_linker("BufferLineInfo", "BufferLineBuffer")
+  highlight_linker("BufferLineInfoDiagnosticVisible", "BufferLineBufferVisible")
+  highlight_linker("BufferLineInfoVisible", "BufferLineBufferVisible")
+
+  -- Hints:
+  highlighter("BufferLineHintDiagnosticSelected", bold, bg_0, br_yellow, none)
+  highlight_linker("BufferLineHintSelected", "BufferLineBufferSelected")
+  highlight_linker("BufferLineHintDiagnostic", "BufferLineBuffer")
+  highlight_linker("BufferLineHint", "BufferLineBuffer")
+  highlight_linker("BufferLineHintDiagnosticVisible", "BufferLineBufferVisible")
+  highlight_linker("BufferLineHintVisible", "BufferLineBufferVisible")
+
+  -- Duplicateds:
+  highlighter("BufferLineDuplicate", nocombine, base, bg_1, none)
+  highlighter("BufferLineDuplicateSelected", nocombine, none, accent_0, none)
+  highlighter("BufferLineDuplicateVisible", nocombine, none, bg_2, none)
+
+  -- Groups:
+  highlighter("BufferLineGroupLabel", nocombine, none, bg_2, none)
+  highlight_linker("BufferLineGroupSeparator", "BufferLineGroupLabel")
+
+  -- Picks:
+  highlighter("BufferLinePick", bold, base, br_yellow, none)
+  highlighter("BufferLinePickSelected", bold, bg_0, br_yellow, none)
+  highlight_linker("BufferLinePickVisible", "BufferLinePickSelected")
+
+  -- Separators:
+  highlighter("BufferLineSeparator", nocombine, base, base, none)
+  highlighter("BufferLineSeparatorSelected", nocombine, bg_0, base, none)
+  highlight_linker("BufferLineSeparatorVisible", "BufferLineSeparatorSelected")
+  highlight_linker("BufferLineOffsetSeparator", "BufferLineIndicatorSelected")
+
+  -- Tabs:
+  highlighter("BufferLineTabSeparatorSelected", nocombine, bg_0, bg_0, none)
+  highlighter("BufferLineTabSelected", nocombine, none, accent_1, none)
+  highlight_linker("BufferLineTab", "BufferLineBuffer")
+  highlight_linker("BufferLineTabClose", "BufferLineTabSelected")
+  highlight_linker("BufferLineTabSeparator", "BufferLineSeparator")
+end
+
+-- copilot.lua
+if plugin_is_activated("copilot") then
+  highlight_linker("CopilotSuggestion", "Comment")
+end
+
+-- dashboard-nvim:
+if plugin_is_activated("dashboard") then
+  highlight_linker("DashboardHeader", "Accent")
+  highlight_linker("DashboardCenter", "Text")
+  highlight_linker("DashboardShortCut", "Text")
+  highlight_linker("DashboardFooter", "Dimmed")
+end
+
+-- gitsigns.nvim:
+if plugin_is_activated("gitsigns") then
+  if vim.go.termguicolors == true or vim.fn.has("gui_running") then
+    highlighter("GitSignsAddLn", none, blend_added, none, none)
+    highlighter("GitSignsChangeLn", none, blend_modified, none, none)
+  else
+    highlighter("GitSignsAddLn", none, green, bg_1, none)
+    highlighter("GitSignsChangeLn", none, yellow, bg_1, none)
+  end
+  highlighter("GitSignsAddInline", none, green, bg_1, none)
+  highlighter("GitSignsDeleteInline", none, yellow, bg_1, none)
+  highlighter("GitSignsChangeInline", none, red, bg_1, none)
+  highlight_linker("GitSignsAdd", "DiffAdd")
+  highlight_linker("GitSignsDelete", "DiffDelete")
+  highlight_linker("GitSignsChange", "DiffChange")
+  highlight_linker("GitSignsAddNr", "GitSignsAdd")
+  highlight_linker("GitSignsChangeNr", "GitSignsChange")
+  highlight_linker("GitSignsDeleteNr", "GitSignsDelete")
+  highlight_linker("GitSignsAddPreview", "GitSignsAdd")
+  highlight_linker("GitSignsDeletePreview", "GitSignsDelete")
+  highlight_linker("GitSignsCurrentLineBlame", "Dimmed")
+  highlight_linker("GitSignsAddLnInline", "GitSignsAddInline")
+  highlight_linker("GitSignsChangeLnInline", "GitSignsChangeInline")
+  highlight_linker("GitSignsDeleteLnInline", "GitSignsDeleteInline")
+  highlight_linker("GitSignsAddLnVirtLnInLine", "GitSignsAddLnInline")
+  highlight_linker("GitSignsChangeVirtLnInLine", "GitSignsChangeLnInline")
+  highlight_linker("GitSignsDeleteVirtLnInLine", "GitSignsDeleteLnInline")
+end
+
+-- indent-blankline:
+if plugin_is_activated("indent-blankline") then
+  highlighter("IndentBlanklineChar", none, none, bg_2, none)
+  highlighter("IndentBlanklineSpaceChar", none, none, bg_2, none)
+  highlighter("IndentBlanklineSpaceCharBlankline", none, none, bg_2, none)
+  highlighter("IndentBlanklineContextChar", none, none, dim_0, none)
+  highlighter("IndentBlanklineContextStart", underline, none, none, dim_0)
+
+  -- Enfocado groups:
+  highlighter("EnfocadoIndentBlanklineIndent1", none, none, accent_1, none)
+  highlighter("EnfocadoIndentBlanklineIndent2", none, none, cyan, none)
+  highlighter("EnfocadoIndentBlanklineIndent3", none, none, accent_0, none)
+  highlighter("EnfocadoIndentBlanklineIndent4", none, none, br_accent_1, none)
+  highlighter("EnfocadoIndentBlanklineIndent5", none, none, br_cyan, none)
+  highlighter("EnfocadoIndentBlanklineIndent6", none, none, br_accent_0, none)
+end
+
+-- netrw:
+if plugin_is_activated("netrw") then
+  highlight_linker("netrwClassify", "Dimmed")
+  highlight_linker("netrwCmdSep", "Ignore")
+  highlight_linker("netrwComment", "Comment")
+  highlight_linker("netrwDir", "Directory")
+  highlight_linker("netrwExe", "FileExec")
+  highlight_linker("netrwHelpCmd", "Text")
+  highlight_linker("netrwLink", "FileLink")
+  highlight_linker("netrwList", "Dimmed")
+  highlight_linker("netrwPlain", "Text")
+  highlight_linker("netrwSymLink", "netrwLink")
+  highlight_linker("netrwVersion", "Ignore")
+end
+
+-- noice.nvim:
+if plugin_is_activated("noice") then
+  highlighter("NoiceConfirmBorder", nocombine, bg_1, br_yellow, none)
+  highlighter("NoiceFormatConfirm", nocombine, bg_2, yellow, none)
+  highlighter("NoiceFormatConfirmDefault", nocombine, br_yellow, bg_1, none)
+  highlight_linker("NoiceCmdlineIconCmdline", "NoiceCmdlineIcon")
+  highlight_linker("NoiceCmdlineIconFilter", "NoiceCmdlineIcon")
+  highlight_linker("NoiceCmdlineIconHelp", "NoiceCmdlineIcon")
+  highlight_linker("NoiceCmdlineIconInput", "NoiceCmdlineIcon")
+  highlight_linker("NoiceCmdlineIconLua", "NoiceCmdlineIcon")
+  highlight_linker("NoiceCmdlineIconSearch", "NoiceCmdlineIcon")
+  highlight_linker("NoiceCmdlineIcon", "Text")
+  highlight_linker("NoiceCmdline", "MsgArea")
+  highlight_linker("NoiceCmdlinePopupBorderCmdline", "NoiceCmdlinePopupBorder")
+  highlight_linker("NoiceCmdlinePopupBorderFilter", "NoiceCmdlinePopupBorder")
+  highlight_linker("NoiceCmdlinePopupBorderHelp", "NoiceCmdlinePopupBorder")
+  highlight_linker("NoiceCmdlinePopupBorderInput", "NoiceCmdlinePopupBorder")
+  highlight_linker("NoiceCmdlinePopupBorderLua", "NoiceCmdlinePopupBorder")
+  highlight_linker("NoiceCmdlinePopupBorder", "NoicePopupBorder")
+  highlight_linker("NoiceCmdlinePopupBorderSearch", "NoiceCmdlinePopupBorder")
+  highlight_linker("NoiceCmdlinePopup", "NoicePopup")
+  highlight_linker("NoiceCmdlinePrompt", "Question")
+  highlight_linker("NoiceConfirm", "NoicePopup")
+  highlight_linker("NoiceCursor", "Cursor")
+  highlight_linker("NoiceFormatDate", "Text")
+  highlight_linker("NoiceFormatEvent", "Text")
+  highlight_linker("NoiceFormatKind", "NonText")
+  highlight_linker("NoiceFormatLevelDebug", "Debug")
+  highlight_linker("NoiceFormatLevelError", "DiagnosticError")
+  highlight_linker("NoiceFormatLevelInfo", "DiagnosticInfo")
+  highlight_linker("NoiceFormatLevelOff", "Dimmed")
+  highlight_linker("NoiceFormatLevelTrace", "Trace")
+  highlight_linker("NoiceFormatLevelWarn", "DiagnosticWarn")
+  highlight_linker("NoiceFormatProgressDone", "Success")
+  highlight_linker("NoiceFormatProgressTodo", "Accent")
+  highlight_linker("NoiceFormatTitle", "Title")
+  highlight_linker("NoiceLspProgressClient", "Accent")
+  highlight_linker("NoiceLspProgressSpinner", "DiagnosticInfo")
+  highlight_linker("NoiceLspProgressTitle", "NoiceFormatTitle")
+  highlight_linker("NoiceMini", "MsgArea")
+  highlight_linker("NoicePopupBorder", "FloatBorder")
+  highlight_linker("NoicePopupmenuBorder", "NoicePopupBorder")
+  highlight_linker("NoicePopupmenuMatch", "Accent")
+  highlight_linker("NoicePopupmenu", "Pmenu")
+  highlight_linker("NoicePopupmenuSelected", "PmenuSel")
+  highlight_linker("NoicePopup", "NormalFloat")
+  highlight_linker("NoiceScrollbar", "PmenuSbar")
+  highlight_linker("NoiceScrollbarThumb", "PmenuThumb")
+  highlight_linker("NoiceSplitBorder", "VertSplit")
+  highlight_linker("NoiceSplit", "Normal")
+  highlight_linker("NoiceVirtualText", "DiagnosticVirtualTextInfo")
+
+  -- Completion item kinds:
+  highlight_linker("NoiceCompletionItemKindClass", "Type")
+  highlight_linker("NoiceCompletionItemKindColor", "StatementBuiltin")
+  highlight_linker("NoiceCompletionItemKindConstant", "ConstIdentifier")
+  highlight_linker("NoiceCompletionItemKindConstructor", "Type")
+  highlight_linker("NoiceCompletionItemKindDefault", "Text")
+  highlight_linker("NoiceCompletionItemKindEnumMember", "Property")
+  highlight_linker("NoiceCompletionItemKindEnum", "Type")
+  highlight_linker("NoiceCompletionItemKindField", "Property")
+  highlight_linker("NoiceCompletionItemKindFile", "Text")
+  highlight_linker("NoiceCompletionItemKindFolder", "Directory")
+  highlight_linker("NoiceCompletionItemKindFunction", "Accent")
+  highlight_linker("NoiceCompletionItemKindInterface", "Type")
+  highlight_linker("NoiceCompletionItemKindKeyword", "Keyword")
+  highlight_linker("NoiceCompletionItemKindMethod", "Accent")
+  highlight_linker("NoiceCompletionItemKindModule", "Text")
+  highlight_linker("NoiceCompletionItemKindProperty", "Property")
+  highlight_linker("NoiceCompletionItemKindSnippet", "Text")
+  highlight_linker("NoiceCompletionItemKindStruct", "Type")
+  highlight_linker("NoiceCompletionItemKindText", "Text")
+  highlight_linker("NoiceCompletionItemKindUnit", "Number")
+  highlight_linker("NoiceCompletionItemKindValue", "Text")
+  highlight_linker("NoiceCompletionItemKindVariable", "Identifier")
+end
+
+-- null-ls:
+if plugin_is_activated("null-ls") then
+  highlight_linker("NullLsInfoHeader", "Title")
+  highlight_linker("NullLsInfoTitle", "Title")
+  highlight_linker("NullLsInfoBorder", "FloatBorder")
+  highlight_linker("NullLsInfoSources", "Success")
+end
+
+-- nvim-cmp:
+if plugin_is_activated("cmp") then
+  highlight_linker("CmpItemAbbr", "Text")
+  highlight_linker("CmpItemAbbrDeprecated", "Error")
+  highlight_linker("CmpItemAbbrMatch", "Match")
+  highlight_linker("CmpItemAbbrMatchFuzzy", "MatchFuzzy")
+  highlight_linker("CmpItemKindClass", "Type")
+  highlight_linker("CmpItemKindColor", "StatementBuiltin")
+  highlight_linker("CmpItemKindConstant", "ConstIdentifier")
+  highlight_linker("CmpItemKindConstructor", "Type")
+  highlight_linker("CmpItemKind", "Text")
+  highlight_linker("CmpItemKindEnum", "Type")
+  highlight_linker("CmpItemKindEnumMember", "Property")
+  highlight_linker("CmpItemKindEvent", "Builtin")
+  highlight_linker("CmpItemKindField", "Property")
+  highlight_linker("CmpItemKindFile", "Text")
+  highlight_linker("CmpItemKindFolder", "Directory")
+  highlight_linker("CmpItemKindFunction", "Accent")
+  highlight_linker("CmpItemKindInterface", "Type")
+  highlight_linker("CmpItemKindKeyword", "Keyword")
+  highlight_linker("CmpItemKindMethod", "Accent")
+  highlight_linker("CmpItemKindModule", "Text")
+  highlight_linker("CmpItemKindOperator", "Operator")
+  highlight_linker("CmpItemKindProperty", "Property")
+  highlight_linker("CmpItemKindReference", "Accent")
+  highlight_linker("CmpItemKindSnippet", "Text")
+  highlight_linker("CmpItemKindStruct", "Type")
+  highlight_linker("CmpItemKindText", "Text")
+  highlight_linker("CmpItemKindTypeParameter", "Type")
+  highlight_linker("CmpItemKindUnit", "Number")
+  highlight_linker("CmpItemKindValue", "Text")
+  highlight_linker("CmpItemKindVariable", "Identifier")
+  highlight_linker("CmpItemMenu", "NormalFloat")
+end
+
+-- nvim-dap-ui:
+if plugin_is_activated("dap-ui") then
+  highlighter("DapUIPlayPause", nocombine, none, br_blue, none)
+  highlighter("DapUIPlayPauseNC", nocombine, none, blue, none)
+  highlighter("DapUIRestart", nocombine, none, br_green, none)
+  highlighter("DapUIRestartNC", nocombine, none, green, none)
+  highlighter("DapUIStepBack", nocombine, none, br_blue, none)
+  highlighter("DapUIStepBackNC", nocombine, none, blue, none)
+  highlighter("DapUIStepInto", nocombine, none, br_blue, none)
+  highlighter("DapUIStepIntoNC", nocombine, none, blue, none)
+  highlighter("DapUIStepOut", nocombine, none, br_blue, none)
+  highlighter("DapUIStepOutNC", nocombine, none, blue, none)
+  highlighter("DapUIStepOver", nocombine, none, br_blue, none)
+  highlighter("DapUIStepOverNC", nocombine, none, blue, none)
+  highlighter("DapUIStop", nocombine, none, br_red, none)
+  highlighter("DapUIStopNC", nocombine, none, red, none)
+  highlighter("DapUIUnavailable", nocombine, none, dim_0, none)
+  highlighter("DapUIUnavailableNC", nocombine, none, bg_2, none)
+  highlight_linker("DapUIVariable", "Identifier")
+  highlight_linker("DapUIScope", "Title")
+  highlight_linker("DapUIType", "Type")
+  highlight_linker("DapUIValue", "Text")
+  highlight_linker("DapUIModifiedValue", "DiffChange")
+  highlight_linker("DapUIDecoration", "Accent")
+  highlight_linker("DapUIThread", "Success")
+  highlight_linker("DapUIStoppedThread", "Error")
+  highlight_linker("DapUIFrameName", "Title")
+  highlight_linker("DapUISource", "Text")
+  highlight_linker("DapUILineNumber", "LineNr")
+  highlight_linker("DapUIFloatNormal", "NormalFloat")
+  highlight_linker("DapUIFloatBorder", "FloatBorder")
+  highlight_linker("DapUIWatchesEmpty", "Text")
+  highlight_linker("DapUIWatchesValue", "Text")
+  highlight_linker("DapUIWatchesError", "Error")
+  highlight_linker("DapUIBreakpointsPath", "Text")
+  highlight_linker("DapUIBreakpointsInfo", "DiagnosticInfo")
+  highlight_linker("DapUIBreakpointsCurrentLine", "DiffChange")
+  highlight_linker("DapUIBreakpointsLine", "LineNr")
+  highlight_linker("DapUIBreakpointsDisabledLine", "LineNr")
+  highlight_linker("DapUICurrentFrameName", "DiffChange")
+end
+
+-- lazy.nvim:
+if plugin_is_activated("lazy") then
+  highlighter("LazyButton", nocombine, bg_2, fg_0, none)
+  highlight_linker("LazyButtonActive", "ToolbarButton")
+  highlight_linker("LazyComment", "Comment")
+  highlight_linker("LazyCommit", "ConstIdentifier")
+  highlight_linker("LazyCommitIssue", "Text")
+  highlight_linker("LazyCommitScope", "Text")
+  highlight_linker("LazyCommitType", "Text")
+  highlight_linker("LazyDir", "Directory")
+  highlight_linker("LazyH1", "LazyButtonActive")
+  highlight_linker("LazyH2", "Title")
+  highlight_linker("LazyNoCond", "Dimmed")
+  highlight_linker("LazyNormal", "NormalFloat")
+  highlight_linker("LazyProgressDone", "Success")
+  highlight_linker("LazyProgressTodo", "NonText")
+  highlight_linker("LazyProp", "Property")
+  highlight_linker("LazyReasonCmd", "Question")
+  highlight_linker("LazyReasonEvent", "Question")
+  highlight_linker("LazyReasonFt", "Question")
+  highlight_linker("LazyReasonImport", "Text")
+  highlight_linker("LazyReasonKeys", "Question")
+  highlight_linker("LazyReasonPlugin", "Directory")
+  highlight_linker("LazyReasonRuntime", "Text")
+  highlight_linker("LazyReasonSource", "Question")
+  highlight_linker("LazyReasonStart", "Success")
+  highlight_linker("LazySpecial", "Special")
+  highlight_linker("LazyTaskError", "DiagnosticVirtualTextError")
+  highlight_linker("LazyTaskOutput", "DiagnosticVirtualTextWarn")
+  highlight_linker("LazyUrl", "Link")
+  highlight_linker("LazyValue", "Constant")
+end
+
+-- neo-tree.nvim:
+if plugin_is_activated("neo-tree") then
+  highlight_linker("NeoTreeBufferNumber", "Number")
+  highlight_linker("NeoTreeCursorLine", "CursorLine")
+  highlight_linker("NeoTreeDimText", "Dimmed")
+  highlight_linker("NeoTreeDirectoryIcon", "NeoTreeDirectoryName")
+  highlight_linker("NeoTreeDirectoryName", "Directory")
+  highlight_linker("NeoTreeDotfile", "NeoTreeFileName")
+  highlight_linker("NeoTreeFileIcon", "NeoTreeFileName")
+  highlight_linker("NeoTreeFileName", "Text")
+  highlight_linker("NeoTreeFileNameOpened", "Accent")
+  highlight_linker("NeoTreeFilterTerm", "Search")
+  highlight_linker("NeoTreeFloatBorder", "FloatBorder")
+  highlight_linker("NeoTreeFloatTitle", "NormalFloat")
+  highlight_linker("NeoTreeGitAdded", "DiffAdd")
+  highlight_linker("NeoTreeGitConflict", "DiagnosticWarn")
+  highlight_linker("NeoTreeGitDeleted", "DiffDelete")
+  highlight_linker("NeoTreeGitIgnored", "Dimmed")
+  highlight_linker("NeoTreeGitModified", "DiffChange")
+  highlight_linker("NeoTreeGitUnstaged", "Dimmed")
+  highlight_linker("NeoTreeGitUntracked", "Dimmed")
+  highlight_linker("NeoTreeGitStaged", "DiffAdd")
+  highlight_linker("NeoTreeHiddenByName", "Dimmed")
+  highlight_linker("NeoTreeIndentMarker", "NonText")
+  highlight_linker("NeoTreeExpander", "NonText")
+  highlight_linker("NeoTreeNormal", "Normal")
+  highlight_linker("NeoTreeNormalNC", "NormalNC")
+  highlight_linker("NeoTreeSignColumn", "SignColumn")
+  highlight_linker("NeoTreeStatusLine", "StatusLine")
+  highlight_linker("NeoTreeStatusLineNC", "StatusLineNC")
+  highlight_linker("NeoTreeVertSplit", "VertSplit")
+  highlight_linker("NeoTreeWinSeparator", "WinSeparator")
+  highlight_linker("NeoTreeEndOfBuffer", "EndOfBuffer")
+  highlight_linker("NeoTreeRootName", "NeoTreeDirectoryName")
+  highlight_linker("NeoTreeSymbolicLinkTarget", "FileLink")
+  highlight_linker("NeoTreeTitleBar", "NeoTreeFloatTitle")
+  highlight_linker("NeoTreeWindowsHidden", "Dimmed")
+
+  -- Tabs:
+  highlighter("NeoTreeTabInactive", nocombine, base, bg_2, none)
+  highlighter("NeoTreeTabActive", nocombine, none, br_accent_0, none)
+  highlighter("NeoTreeTabSeparatorInactive", nocombine, base, base, none)
+  highlighter("NeoTreeTabSeparatorActive", nocombine, none, br_accent_0, none)
+
+  -- Others:
+  highlight_linker("NeoTreeModified", "Accent")
+  highlight_linker("NeoTreeMessage", "MsgArea")
+end
+
+-- nvim-lspconfig:
+if plugin_is_activated("lspconfig") then
+  highlight_linker("LspInfoTitle", "Title")
+  highlight_linker("LspInfoList", "Dimmed")
+  highlight_linker("LspInfoFiletype", "Success")
+  highlight_linker("LspInfoTip", "DiagnosticInfo")
+  highlight_linker("LspInfoBorder", "FloatBorder")
+end
+
+-- nvim-notify:
+if plugin_is_activated("notify") then
+  highlighter("NotifyERRORBorder", nocombine, bg_1, br_red, none)
+  highlighter("NotifyDEBUGBorder", nocombine, bg_1, dim_0, none)
+  highlighter("NotifyINFOBorder", nocombine, bg_1, br_yellow, none)
+  highlighter("NotifyTRACEBorder", nocombine, bg_1, br_magenta, none)
+  highlighter("NotifyWARNBorder", nocombine, bg_1, br_orange, none)
+  highlight_linker("NotifyERRORIcon", "DiagnosticError")
+  highlight_linker("NotifyDEBUGIcon", "Debug")
+  highlight_linker("NotifyINFOIcon", "DiagnosticInfo")
+  highlight_linker("NotifyTRACEIcon", "Trace")
+  highlight_linker("NotifyWARNIcon", "DiagnosticWarn")
+  highlight_linker("NotifyERRORTitle", "NotifyERRORIcon")
+  highlight_linker("NotifyDEBUGTitle", "NotifyDEBUGIcon")
+  highlight_linker("NotifyINFOTitle", "NotifyINFOIcon")
+  highlight_linker("NotifyTRACETitle", "NotifyTRACEIcon")
+  highlight_linker("NotifyWARNTitle", "NotifyWARNIcon")
+  highlight_linker("NotifyERRORBody", "NormalFloat")
+  highlight_linker("NotifyDEBUGBody", "NormalFloat")
+  highlight_linker("NotifyINFOBody", "NormalFloat")
+  highlight_linker("NotifyTRACEBody", "NormalFloat")
+  highlight_linker("NotifyWARNBody", "NormalFloat")
+end
