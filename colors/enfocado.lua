@@ -615,6 +615,14 @@ if plugin_is_activated("dashboard") then
   highlight_linker("DashboardFooter", "Dimmed")
 end
 
+-- alpha-nvim:
+if plugin_is_activated("alpha") == 1 then
+  highlight_linker("AlphaHeader", "Accent")
+  highlight_linker("AlphaCenter", "Dimmed")
+  highlight_linker("AlphaShortcut", "Dimmed")
+  highlight_linker("AlphaFooter", "Ignore")
+end
+
 -- gitsigns.nvim:
 if plugin_is_activated("gitsigns") then
   if vim.go.termguicolors == true or vim.fn.has("gui_running") then
