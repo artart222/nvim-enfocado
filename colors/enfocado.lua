@@ -20,7 +20,42 @@ end
 -- The Enfocado theme is initialized.
 vim.g.colors_name = "enfocado"
 
+-- Enfocado configuration variables are initialized.
+local enfocado_style = vim.g.enfocado_style
+local enfocado_plugins = vim.g.enfocado_plugins
+
 -- Dark or light scheme is initialized.
+local bg_0
+local bg_1
+local bg_2
+local dim_0
+local fg_0
+local fg_1
+local red
+local green
+local yellow
+local blue
+local magenta
+local cyan
+local orange
+local violet
+local br_red
+local br_green
+local br_yellow
+local br_blue
+local br_magenta
+local br_cyan
+local br_orange
+local br_violet
+local base
+local blend_error
+local blend_hint
+local blend_info
+local blend_warn
+local blend_added
+local blend_modified
+local blend_removed
+local blend_search
 if vim.go.background == "dark" then
   -- Selenized black color scheme variables are declared.
   bg_0 = { "#181818", 234 }
@@ -92,7 +127,15 @@ else
 end
 
 -- Style colors.
-if vim.g.enfocado_style == "nature" then
+local accent_0
+local accent_1
+local br_accent_0
+local br_accent_1
+local builtin_0
+local builtin_1
+local br_builtin_0
+local br_builtin_1
+if enfocado_style == "nature" then
   -- Nature accent colors.
   accent_0 = green
   accent_1 = blue
@@ -110,10 +153,10 @@ else
   br_accent_0 = br_magenta
   br_accent_1 = br_violet
   -- Neon builtin colors (nature colors).
-  builtin_0 = colors.green
-  builtin_1 = colors.blue
-  br_builtin_0 = colors.br_green
-  br_builtin_1 = colors.br_blue
+  builtin_0 = green
+  builtin_1 = blue
+  br_builtin_0 = br_green
+  br_builtin_1 = br_blue
 end
 
 -- NeoVim terminal variables are assigned.
@@ -155,7 +198,7 @@ vim.g.terminal_color_14 = br_cyan[1]
 vim.g.terminal_color_15 = fg_1[1]
 
 -- Attributes are declared.
--- TODO: Check this part.
+-- TODO: Check this part and do some cleaning.
 local none = {}
 local nocombine =
   { nocombine = true, reverse = false, bold = false, italic = false, underline = false, undercurl = false }
@@ -171,10 +214,6 @@ local bold_underline =
   { nocombine = false, reverse = false, undercurl = false, underline = true, bold = true, italic = false }
 local reverse =
   { nocombine = false, reverse = true, undercurl = false, underline = false, bold = false, italic = false }
-
--- Enfocado configuration variables are initialized.
-local enfocado_style = vim.g.enfocado_style
-local enfocado_plugins = vim.g.enfocado_plugins
 
 -- A function is created to check on-demand plugins.
 local function plugin_is_activated(name)
@@ -197,6 +236,7 @@ end
 
 -- A function is created to make using nvim_set_hl easier.
 local function highlighter(group, set_attr, bg_color, fg_color, set_sp)
+  -- TODO: Use linker of nvim_set_hl(). see :help nvim_set_hl()
   if type(next(fg_color)) == "nil" then
     fg_color = { nil, nil }
   end
@@ -422,9 +462,9 @@ if vim.go.termguicolors == true or vim.fn.has("gui_running") == true then
   highlighter("DiagnosticVirtualTextWarn", bold, blend_warn, br_orange, none)
 else
   highlight_linker("DiagnosticVirtualTextErrorer", "DiagnosticFloatingError")
-  highligh_linker("DiagnosticVirtualTextHint", "DiagnosticFloatingHint")
-  highligh_linker("DiagnosticVirtualTextInfo", "DiagnosticFloatingInfo")
-  highligh_linker("DiagnosticVirtualTextWarn", "DiagnosticFloatingWarn")
+  highlight_linker("DiagnosticVirtualTextHint", "DiagnosticFloatingHint")
+  highlight_linker("DiagnosticVirtualTextInfo", "DiagnosticFloatingInfo")
+  highlight_linker("DiagnosticVirtualTextWarn", "DiagnosticFloatingWarn")
 end
 highlight_linker("DiagnosticSignError", "DiagnosticError")
 highlight_linker("DiagnosticSignHint", "DiagnosticHint")
@@ -469,6 +509,7 @@ highlight_linker("diffSubname", "Title")
 --------------------------------------------------------------------------------
 -- SECTION: Plugins for Neo(Vim) groups highlighting:
 --------------------------------------------------------------------------------
+-- TODO: Add more CodeArt plugins.
 
 if plugin_is_activated("aerial") then
   -- Cursorlines:
@@ -963,12 +1004,12 @@ end
 
 -- nvim-scrollview:
 if plugin_is_activated("scrollview") then
-  highlight_linker("ScrollView", "Line")
+  highlighter("ScrollView", none, fg_1, bg_1, none)
 end
 
 -- nvim-surround:
 if plugin_is_activated("surround") then
-  highlight_link("NvimSurroundHighlight", "Search")
+  highlight_linker("NvimSurroundHighlight", "Search")
 end
 
 -- nvim-treesitter:
